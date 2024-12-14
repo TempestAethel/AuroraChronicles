@@ -1,4 +1,50 @@
-<h1><strong>A Tale of Two Perspectives</strong></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unspoken Expectations</title>
+    <style>
+        :root {
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-theme {
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+  <h1><strong>A Tale of Two Perspectives</strong></h1>
 <hr>
 <h2><strong>Chapter 1: Foundations of a Bond</strong></h2>
 <p>The early evening sun cast golden hues over the quiet neighborhood where Alex and Jordan grew up. The cul-de-sac was their playground, a place of shared adventures and whispered dreams. It was here that their bond had been forged, one that seemed unbreakable.</p>
@@ -61,3 +107,19 @@
 <p><strong>Growth</strong>: Both Alex and Jordan grew not by abandoning their ideals, but by learning to balance them with compassion and compromise.</p>
 <hr>
 <p><em>End of Story</em></p>
+
+      <script>
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('light-theme');
+            // Save the current theme to localStorage
+            localStorage.setItem('theme', isDark ? '' : 'light-theme');
+        }
+    </script>
+</body>
+</html>
