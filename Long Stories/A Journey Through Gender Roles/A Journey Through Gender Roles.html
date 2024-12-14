@@ -1,3 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unspoken Expectations</title>
+    <style>
+        :root {
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-theme {
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+  
 <h3>Chapter 1: The Archetype of the Modern Man</h3>
 <h4><strong>Subheading 1: Historical Archetypes of Masculinity</strong></h4>
 <p>The idea of masculinity has evolved throughout history, shaped by cultural norms, societal needs, and historical events. In ancient times, masculinity was closely linked to physical strength and dominance. Hunters and warriors were revered as the pinnacle of male achievement, their worth tied to their ability to protect, provide, and conquer. In medieval societies, the archetype of the knight emerged—chivalrous, stoic, and bound by a strict code of honor. This figure not only embodied physical prowess but also moral fortitude, setting a standard that lingered long after swords and shields were replaced by other forms of influence.</p>
@@ -285,3 +332,19 @@
 <hr>
 <h2>Final Thoughts</h2>
 <p>The perceptions presented often arise from cultural stereotypes, societal expectations, and personal experiences rather than objective truths. Both men and women are capable of showing loyalty, making mistakes, experiencing stress, and being good or bad. The key to fostering better relationships and understanding is to move beyond generalizations, embrace open communication, and assess individuals based on their actions and character rather than preconceived biases.</p>
+
+    <script>
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('light-theme');
+            // Save the current theme to localStorage
+            localStorage.setItem('theme', isDark ? '' : 'light-theme');
+        }
+    </script>
+</body>
+</html>
