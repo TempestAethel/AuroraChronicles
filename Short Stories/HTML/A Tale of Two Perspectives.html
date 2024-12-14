@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unspoken Expectations</title>
+    <title>Tale of Two Perspectives</title>
     <style>
         :root {
             --background-dark: #121212;
@@ -12,6 +12,9 @@
             --text-light: #000000;
             --primary-color: #007bff;
             --secondary-color: #0056b3;
+            --border-radius: 10px;
+            --max-width: 900px;
+            --padding: 20px;
         }
 
         body {
@@ -19,11 +22,9 @@
             font-family: 'Arial', sans-serif;
             background-color: var(--background-dark);
             color: var(--text-dark);
-            transition: background-color 0.3s, color 0.3s;
             line-height: 1.6;
             padding: 20px;
-            max-width: 100%;
-            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body.light-theme {
@@ -31,31 +32,33 @@
             color: var(--text-light);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: inherit;
+        h1, h2 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+            text-align: center;
         }
 
-        h1, h2 {
-            text-align: center;
-            font-size: 2.5em;
+        h1 {
+            font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
         h2 {
-            font-size: 2em;
-            margin-top: 40px;
+            font-size: 1.8rem;
+            margin-top: 20px;
         }
 
         p {
-            font-size: 1.1em;
+            font-size: 1.1rem;
             margin-bottom: 20px;
         }
 
-        em {
-            font-style: italic;
+        .content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--padding);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
         }
 
         .toggle-btn {
@@ -66,9 +69,10 @@
             background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            transition: background-color 0.3s;
         }
 
         .toggle-btn:hover {
@@ -77,34 +81,30 @@
 
         hr {
             border: 1px solid #ccc;
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 0.9em;
+        em {
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
     <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
 
-    <div class="container">
-        <h1><strong>A Tale of Two Perspectives</strong></h1>
-
+    <div class="content">
+        <h1>Tale of Two Perspectives</h1>
         <hr>
 
-        <h2><strong>Chapter 1: Foundations of a Bond</strong></h2>
+        <h2>Chapter 1: Foundations of a Bond</h2>
         <p>The early evening sun cast golden hues over the quiet neighborhood where Alex and Jordan grew up. The cul-de-sac was their playground, a place of shared adventures and whispered dreams. It was here that their bond had been forged, one that seemed unbreakable.</p>
         <p>Alex had always been the dreamer. With sharp, calculating eyes, they spoke of ambitious plans to escape the confines of their small town. “We’re not meant to stay here forever,” Alex would say, staring out at the horizon with a determination that bordered on defiance.</p>
         <p>Jordan, on the other hand, was the heart of their duo—a grounding presence. With a warm smile and a knack for seeing the good in people, Jordan valued the simple joys: family, friendships, and a life well-lived. “What’s so bad about staying?” Jordan would ask, brushing off Alex’s lofty ambitions with a laugh. “Home isn’t so bad when you make it meaningful.”</p>
         <p>Their personalities balanced each other, creating a dynamic that felt effortless. As children, they built forts in the woods behind their houses, sharing secrets and promises. As teenagers, they navigated heartbreak and uncertainty, always finding solace in their friendship.</p>
         <p>Now in their late twenties, they were still a constant in each other’s lives—until Alex’s decision shattered everything.</p>
-
         <hr>
 
-        <h2><strong>Chapter 2: The Decision</strong></h2>
+        <h2>Chapter 2: The Decision</h2>
         <p>It happened on a rainy October afternoon, in the middle of their favorite diner. Alex sat across from Jordan, a confident smirk playing on their lips.</p>
         <p>“I got the offer,” Alex said, their voice brimming with excitement.</p>
         <p>Jordan looked up from their coffee, startled. “What offer?”</p>
@@ -117,29 +117,26 @@
         <p>“No.” Jordan’s hands clenched into fists. “That’s what <em>you</em> talked about. I thought we were building something together—something meaningful.”</p>
         <p>Alex exhaled, frustrated. “This is meaningful to me. I can’t stay stuck here forever. I need to do this for myself.”</p>
         <p>The rift was instant. Jordan left the diner without another word, the rain pouring down in sheets as Alex stared at the empty seat across from them.</p>
-
         <hr>
 
-        <h2><strong>Chapter 3: Alex’s Perspective</strong></h2>
+        <h2>Chapter 3: Alex’s Perspective</h2>
         <p>Alex sat in their empty apartment, packing boxes stacked around them. The Seattle opportunity was everything they’d worked for: years of late nights coding, networking, and pitching their ideas. Yet, the memory of Jordan’s anger lingered like a shadow.</p>
         <p><em>Why can’t they understand?</em> Alex thought, tossing a sweater into a box. <em>I’ve spent my whole life working toward this moment. Am I supposed to throw it away for a community project?</em></p>
         <p>But beneath the frustration lay guilt. The project had been more than a passion for Jordan—it had been a lifeline for the town. Alex remembered the pride in Jordan’s voice as they spoke at the project’s launch, the way they had rallied volunteers and inspired change.</p>
         <p>Alex sighed, their fingers brushing against a photo tucked between the folds of a hoodie. It was of them and Jordan at the project’s groundbreaking ceremony, smiling and covered in dirt.</p>
         <p>“Maybe I should’ve handled it differently,” Alex murmured, setting the photo aside. But the decision had been made. The plane ticket was booked, and there was no turning back.</p>
-
         <hr>
 
-        <h2><strong>Chapter 4: Jordan’s Perspective</strong></h2>
+        <h2>Chapter 4: Jordan’s Perspective</h2>
         <p>Jordan stood in the middle of the community center, the hum of activity swirling around them. Volunteers worked tirelessly to distribute supplies and run workshops, but Jordan’s heart wasn’t in it.</p>
         <p><em>Alex really left.</em> The thought gnawed at them, bringing a bitter taste to their mouth.</p>
         <p>For Jordan, the project wasn’t just a venture—it was a promise. A way to give back to the town that had shaped them both. Alex abandoning it felt like a betrayal, a declaration that their shared dream didn’t matter.</p>
         <p>“They always had one foot out the door,” Jordan muttered under their breath, frustration bubbling to the surface. But as the day wore on, doubt began to creep in.</p>
         <p>That night, Jordan sat alone in their small apartment, staring at a message draft on their phone: <em>I don’t hate you, but I don’t understand you. Why wasn’t this enough?</em></p>
         <p>The words felt inadequate, so they deleted the draft and turned off their phone.</p>
-
         <hr>
 
-        <h2><strong>Chapter 5: The Turning Point</strong></h2>
+        <h2>Chapter 5: The Turning Point</h2>
         <p>Weeks passed without contact. Alex thrived in Seattle, their app gaining traction, but an emptiness lingered. Jordan kept the project afloat, but their enthusiasm dimmed.</p>
         <p>It wasn’t until Alex’s mother called them both for her birthday dinner that they were forced to confront each other.</p>
         <p>The atmosphere at the table was tense. Alex sat stiffly, their eyes darting toward Jordan, who barely acknowledged them.</p>
@@ -150,28 +147,22 @@
         <p>Alex hesitated. “You’re right. I was selfish. But I didn’t know how to stay and still be true to myself.”</p>
         <p>Jordan crossed their arms, the tension slowly ebbing. “I get it, Alex. You’ve always wanted more. I just wish you’d realized that what we built here <em>was</em> more—for me.”</p>
         <p>The words hung between them, heavy but healing.</p>
-
         <hr>
 
-        <h2><strong>Chapter 6: Reconciliation</strong></h2>
+        <h2>Chapter 6: Reconciliation</h2>
         <p>Months later, Alex returned to the town for a weekend visit. They stopped by the community center, now thriving despite the odds.</p>
         <p>Jordan greeted them with a hesitant smile. “Didn’t expect to see you here.”</p>
         <p>“I’ve been thinking about what you said,” Alex admitted. “I want to help again—maybe from afar, but I want to contribute.”</p>
         <p>Jordan studied them for a moment before nodding. “I’d like that.”</p>
         <p>It wasn’t a perfect resolution, but it was a start. Their friendship, like the community project, would take work. But for the first time, they both saw the value in the other’s perspective.</p>
-
         <hr>
 
-        <h2><strong>Themes and Closing Thoughts</strong></h2>
+        <h2>Themes and Closing Thoughts</h2>
         <p><strong>Perspective</strong>: Alex and Jordan’s journey highlights the importance of seeing beyond one’s own ambitions or values to understand someone else’s truth.</p>
         <p><strong>Friendship</strong>: True bonds are tested but can endure when both sides choose to rebuild.</p>
         <p><strong>Growth</strong>: Both Alex and Jordan grew not by abandoning their ideals, but by learning to balance them with compassion and compromise.</p>
-
         <hr>
-
-        <footer>
-            <p><em>End of Story</em></p>
-        </footer>
+        <p><em>End of Story</em></p>
     </div>
 
     <script>
