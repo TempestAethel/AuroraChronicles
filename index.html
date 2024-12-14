@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Story Hub</title>
     <style>
+        :root {
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+            --button-color: #4e73df;
+            --button-hover-color: #375a7f;
+        }
+
         /* General Reset */
         * {
             margin: 0;
@@ -15,10 +24,16 @@
         /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #f0f0f0;
+            background-color: var(--background-dark);
+            color: var(--text-dark);
             line-height: 1.6;
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-theme {
+            background-color: var(--background-light);
+            color: var(--text-light);
         }
 
         /* Header Styling */
@@ -28,22 +43,22 @@
         }
 
         h1 {
-            color: #ffcc00;
+            color: var(--button-color);
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
         h2 {
             margin: 20px 0 10px;
-            color: #ffcc00;
+            color: var(--button-color);
             font-size: 1.8rem;
         }
 
         /* Buttons */
         .story-button {
             display: inline-block;
-            background: #333333;
-            color: #ffcc00;
+            background: var(--button-color);
+            color: #fff;
             text-decoration: none;
             padding: 10px 20px;
             margin: 8px;
@@ -53,7 +68,7 @@
         }
 
         .story-button:hover {
-            background: #444444;
+            background: var(--button-hover-color);
         }
 
         /* Sections */
@@ -73,6 +88,23 @@
             margin-top: 30px;
             color: #aaa;
         }
+
+        /* Toggle Button */
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: var(--button-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--button-hover-color);
+        }
     </style>
     <script>
         async function fetchStoryLinks() {
@@ -81,12 +113,21 @@
             const storyContainerLong = document.getElementById('long-stories');
             const storyContainerShort = document.getElementById('short-stories');
 
-            async function fetchLinks(apiUrl, container) {
+            async function fetchLinks(apiUrl, container, basePath = '') {
                 const response = await fetch(apiUrl);
                 if (!response.ok) return;
                 const data = await response.json();
                 data.forEach(file => {
-                    if (file.name.endsWith('.html')) {
+                    if (file.type === 'dir') {
+                        const fileName = file.name;
+                        const storyLink = `${basePath}${fileName}/${fileName}.html`;
+                        const link = document.createElement('a');
+                        link.href = storyLink;
+                        link.target = '_blank';
+                        link.textContent = fileName.replace(/_/g, ' ');
+                        link.className = 'story-button';
+                        container.appendChild(link);
+                    } else if (file.name.endsWith('.html')) {
                         const link = document.createElement('a');
                         link.href = file.html_url;
                         link.target = '_blank';
@@ -97,8 +138,12 @@
                 });
             }
 
-            await fetchLinks(longStoriesUrl, storyContainerLong);
+            await fetchLinks(longStoriesUrl, storyContainerLong, '/Long Stories/');
             await fetchLinks(shortStoriesUrl, storyContainerShort);
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
         }
 
         window.onload = fetchStoryLinks;
@@ -108,6 +153,7 @@
     <header>
         <h1>Aurora Chronicles - Story Hub</h1>
         <p>Your gateway to explore long and short stories.</p>
+        <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
     <!-- Long Stories Section -->
