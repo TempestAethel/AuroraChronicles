@@ -121,7 +121,7 @@
                 data.forEach(file => {
                     if (file.type === 'dir') {
                         const fileName = file.name;
-                        const storyLink = `${basePath}${fileName}/${fileName}.html`;
+                        const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/${fileName}/${fileName}.html`;
                         const link = document.createElement('a');
                         link.href = storyLink;
                         link.target = '_blank';
@@ -129,8 +129,9 @@
                         link.className = 'story-button';
                         container.appendChild(link);
                     } else if (file.name.endsWith('.html')) {
+                        const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/HTML/${file.name}`;
                         const link = document.createElement('a');
-                        link.href = file.html_url;
+                        link.href = storyLink;
                         link.target = '_blank';
                         link.textContent = file.name.replace('.html', '').replace(/_/g, ' ');
                         link.className = 'story-button';
@@ -139,7 +140,7 @@
                 });
             }
 
-            await fetchLinks(longStoriesUrl, storyContainerLong, '/Long Stories/');
+            await fetchLinks(longStoriesUrl, storyContainerLong);
             await fetchLinks(shortStoriesUrl, storyContainerShort);
         }
 
