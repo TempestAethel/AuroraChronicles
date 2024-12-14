@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Hub</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #ffcc00;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            color: #ffcc00;
+            font-size: 1.8rem;
+        }
+
+        /* Buttons */
+        .story-button {
+            display: inline-block;
+            background: #333333;
+            color: #ffcc00;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .story-button:hover {
+            background: #444444;
+        }
+
+        /* Sections */
+        .story-section {
+            margin-bottom: 40px;
+        }
+
+        .story-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #aaa;
+        }
+    </style>
+    <script>
+        async function fetchStoryLinks() {
+            const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories';
+            const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories/HTML';
+            const storyContainerLong = document.getElementById('long-stories');
+            const storyContainerShort = document.getElementById('short-stories');
+
+            async function fetchLinks(apiUrl, container) {
+                const response = await fetch(apiUrl);
+                if (!response.ok) return;
+                const data = await response.json();
+                data.forEach(file => {
+                    if (file.name.endsWith('.html')) {
+                        const link = document.createElement('a');
+                        link.href = file.html_url;
+                        link.target = '_blank';
+                        link.textContent = file.name.replace('.html', '').replace(/_/g, ' ');
+                        link.className = 'story-button';
+                        container.appendChild(link);
+                    }
+                });
+            }
+
+            await fetchLinks(longStoriesUrl, storyContainerLong);
+            await fetchLinks(shortStoriesUrl, storyContainerShort);
+        }
+
+        window.onload = fetchStoryLinks;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Aurora Chronicles - Story Hub</h1>
+        <p>Your gateway to explore long and short stories.</p>
+    </header>
+
+    <!-- Long Stories Section -->
+    <section class="story-section">
+        <h2>Long Stories</h2>
+        <div id="long-stories" class="story-container">
+            <!-- Dynamically loaded long story links -->
+        </div>
+    </section>
+
+    <!-- Short Stories Section -->
+    <section class="story-section">
+        <h2>Short Stories</h2>
+        <div id="short-stories" class="story-container">
+            <!-- Dynamically loaded short story links -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Aurora Chronicles. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
