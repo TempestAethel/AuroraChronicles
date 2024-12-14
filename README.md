@@ -12,7 +12,7 @@ Welcome to the *AuroraChronicles* repository! This is a collection of stories wr
 
 ## *Stories Included*
 
-- The stories featured in this collection can be found on the [Aurora Chronicles Repository](https://tempestaethel.github.io/AuroraChronicles/). Each story explores unique perspectives and emotional journeys. Check out the full list and dive into the captivating narratives!
+- The stories featured in this collection can be found on the [Aurora Chronicles](https://tempestaethel.github.io/AuroraChronicles/). Each story explores unique perspectives and emotional journeys. Check out the full list and dive into the captivating narratives!
 
 
 ## *License*
