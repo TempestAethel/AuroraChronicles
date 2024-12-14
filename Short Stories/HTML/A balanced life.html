@@ -1,4 +1,50 @@
-<h1>The Balancing Act</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unspoken Expectations</title>
+    <style>
+        :root {
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-theme {
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+  <h1>The Balancing Act</h1>
 <h3><strong>The Story of Clara and the Broken Garden</strong></h3>
 <p>Clara was a woman who had always been ambitious. Ever since she could remember, she took pride in never giving up. If it was broken, she would fix it. If it was hard to do, she pushed through. She was convinced that if she tried enough, everything could be accomplished. For a long time, this served her well.</p>
 <p>One spring, Clara decided to turn her backyard into a beautiful garden. She imagined flowers of all colors, vines climbing the fence, and the soft hum of bees busy at work. Yet when she began planting, problems surfaced. The soil was rocky, the weather unpredictable, and pests seemed to invade her garden every other week.</p>
@@ -27,3 +73,18 @@
 <h3><strong>The Lesson</strong></h3>
 <p>Balance, Clara realized, wasn't only an idea-it was a practice. Life required both persistence and patience, both hard work and the wisdom to know when to rest. A feat in her garden and at work, she found that what made for peace and success was recognizing the moments where in she should push forward and where she needed to pull back. And with this, she found deeper fulfillment in her life.</p>
 <p>Sometimes, it's better to keep going. Sometimes, it's better to quit. And sometimes, it's about knowing the difference.</p>
+    <script>
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('light-theme');
+            // Save the current theme to localStorage
+            localStorage.setItem('theme', isDark ? '' : 'light-theme');
+        }
+    </script>
+</body>
+</html>
