@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,14 +10,26 @@
             --text-dark: #ffffff;
             --background-light: #ffffff;
             --text-light: #000000;
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --border-radius: 12px;
+            --max-width: 900px;
+            --padding: 30px;
+            --margin: 15px;
+            --button-padding: 12px 25px;
+            --transition-speed: 0.3s;
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-dark: rgba(0, 0, 0, 0.4);
         }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: var(--background-dark);
             color: var(--text-dark);
-            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+            padding: var(--margin);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
         body.light-theme {
@@ -25,23 +37,69 @@
             color: var(--text-light);
         }
 
+        h1, h2 {
+            font-family: 'Georgia', serif;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--padding);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px var(--shadow-dark);
+            margin-top: var(--margin);
+            margin-bottom: var(--margin);
+        }
+
         .toggle-btn {
             position: fixed;
             top: 10px;
             right: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: var(--button-padding);
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px var(--shadow-dark);
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
         }
 
         .toggle-btn:hover {
-            background-color: #0056b3;
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #ccc;
+            margin: 30px 0;
+        }
+
+        em {
+            color: var(--primary-color);
         }
     </style>
-</head>
+</head>    
 <body>
     <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
 
