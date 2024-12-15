@@ -127,7 +127,7 @@
                         const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/${fileName}/${fileName}.html`;
                         const link = document.createElement('a');
                         link.href = storyLink;
-                        link.target = '_blank';
+                        link.target = '_self';
                         link.textContent = fileName.replace(/_/g, ' ');
                         link.className = 'story-button';
                         container.appendChild(link);
@@ -135,7 +135,7 @@
                         const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/HTML/${file.name}`;
                         const link = document.createElement('a');
                         link.href = storyLink;
-                        link.target = '_blank';
+                        link.target = '_self';
                         link.textContent = file.name.replace('.html', '').replace(/_/g, ' ');
                         link.className = 'story-button';
                         container.appendChild(link);
