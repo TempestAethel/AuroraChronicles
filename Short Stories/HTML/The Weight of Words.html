@@ -9,65 +9,98 @@
     <style>
         :root {
             --background-dark: #121212;
-            --text-color-light: #f0f0f0;
-            --primary-color: #FFD700; /* Gold */
-            --highlight-color: #87CEEB; /* Light Sky Blue */
-            --font-family: 'Georgia', serif;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --border-radius: 10px;
+            --max-width: 900px;
+            --padding: 20px;
         }
+
         body {
-            font-family: var(--font-family);
-            background-color: var(--background-dark);
-            color: var(--text-color-light);
             margin: 0;
-            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-dark);
             line-height: 1.6;
-        }
-        header {
-            text-align: center;
             padding: 20px;
-            background-color: var(--background-dark);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-theme {
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        h1, h2 {
+            font-family: 'Georgia', serif;
             color: var(--primary-color);
+            text-align: center;
         }
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
-        .story-container {
-            padding: 20px;
-            margin: 20px;
-            border-radius: 8px;
-            background-color: #1E1E1E;
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 20px;
         }
-        .highlight {
-            color: var(--highlight-color);
-        }
+
         p {
-            font-size: 1.2rem;
-            margin: 10px 0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
         }
-        .quote {
-            font-style: italic;
-            color: var(--highlight-color);
+
+        .content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--padding);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
         }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--background-dark);
-            color: var(--primary-color);
+
+        .toggle-btn {
             position: fixed;
-            width: 100%;
-            bottom: 0;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        hr {
+            border: 1px solid #ccc;
+            margin: 30px 0;
+        }
+
+        em {
+            color: var(--primary-color);
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>The Weight of Words</h1>
-        <p>By <span class="highlight">AuroraHeart</span></p>
-    </header>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
 
-    <div class="story-container">
-        <p>They sat on the faded couch in her living room, sunlight pooling through the window like golden syrup. <span class="highlight">Amir</span> and <span class="highlight">Lila</span> had spent hours talking—about silly dreams, fleeting moments of school gossip, and the meaning of life as only teenagers could imagine it. Conversations had always been their thread of connection, a rhythm they both understood.</p>
+    <div class="content">
+        <h1>The Weight of Words</h1>
+        <hr>
+
+        <p>They sat on the faded couch in her living room, sunlight pooling through the window like golden syrup. <strong>Amir</strong> and <strong>Lila</strong> had spent hours talking—about silly dreams, fleeting moments of school gossip, and the meaning of life as only teenagers could imagine it. Conversations had always been their thread of connection, a rhythm they both understood.</p>
 
         <p>"You talk too much," Lila teased, a sly grin playing on her lips as she leaned back. “Why don’t you just get comfy for once? You’re always <em>thinking</em>.”</p>
 
@@ -75,9 +108,9 @@
 
         <p>It was strange at first. Silence felt heavier than speech, but Amir began to enjoy it. It was as though he was learning something new: he didn’t have to <em>try</em>. He could simply <em>be</em>. The less he said, the more relaxed he felt. He let the world blur, focusing on himself and his books, folding further into comfort over the next few days.</p>
 
-        <p>But Lila noticed the change. <span class="highlight">The boy who used to talk endlessly now barely spoke.</span> She thought of that moment on the couch, her own words echoing back to her: <em>“Get comfy.”</em> Had she opened a door she didn’t want him to step through? She didn’t know.</p>
+        <p>But Lila noticed the change. <strong>The boy who used to talk endlessly now barely spoke.</strong> She thought of that moment on the couch, her own words echoing back to her: <em>“Get comfy.”</em> Had she opened a door she didn’t want him to step through? She didn’t know.</p>
 
-        <p>---</p>
+        <hr>
 
         <p>Over time, they drifted—quietly, painfully. Amir’s days became consumed by textbooks and exams. He spent hours studying, absorbed in facts and formulas, leaving Lila behind like an untied shoelace.</p>
 
@@ -91,15 +124,15 @@
 
         <p>“And I’m not important?” she shot back. The silence that followed was colder than it had ever been.</p>
 
-        <p>---</p>
+        <hr>
 
         <p>That night, Amir lay awake in his room, staring at the ceiling. He thought of Lila’s words and how much they had meant before. He wondered if he really had done anything wrong. People drift apart, he reasoned. Isn’t that normal?</p>
 
         <p>But a small, nagging voice inside him disagreed.</p>
 
-        <p><strong>*Words.*</strong> That’s what relationships lived on. Before, conversations had been like oxygen between them—filling spaces, creating life. By choosing silence, by indulging in comfort, he had suffocated something fragile without realizing it. He had focused so much on being <em>fine</em> that he’d forgotten how important <em>connection</em> was.</p>
+        <p><em>Words.</em> That’s what relationships lived on. Before, conversations had been like oxygen between them—filling spaces, creating life. By choosing silence, by indulging in comfort, he had suffocated something fragile without realizing it. He had focused so much on being <em>fine</em> that he’d forgotten how important <em>connection</em> was.</p>
 
-        <p>---</p>
+        <hr>
 
         <p>The next day, Amir found Lila sitting on the same couch, arms crossed. He sat beside her, awkward at first, but he forced himself to speak.</p>
 
@@ -112,8 +145,21 @@
         <p>It turned out words weren’t <em>just</em> words. They were anchors, connections, lifelines. And sometimes, all it took was one simple “sorry” to begin again.</p>
     </div>
 
-    <footer>
-        <p>&copy; 2024 <span class="highlight">AuroraHeart</span>. All rights reserved.</p>
-    </footer>
+    <script>
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+        } else {
+            // Apply dark theme by default
+            document.body.classList.add('dark-theme');
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('light-theme');
+            // Save the current theme to localStorage
+            localStorage.setItem('theme', isDark ? '' : 'light-theme');
+        }
+    </script>
 </body>
 </html>
