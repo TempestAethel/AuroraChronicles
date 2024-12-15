@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tale of Two Perspectives</title>
+    <!-- Favicon Link -->
+    <link rel="icon" href="https://github.com/TempestAethel/AuroraChronicles/blob/main/Favicon.png" type="image/png">
+
     <style>
         :root {
             --background-dark: #121212;
@@ -170,6 +173,9 @@
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             document.body.classList.add(savedTheme);
+        } else {
+            // Apply dark theme by default
+            document.body.classList.add('dark-theme');
         }
 
         function toggleTheme() {
