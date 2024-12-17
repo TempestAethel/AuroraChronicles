@@ -159,20 +159,30 @@
         }
     }
 
-    // Function to fetch long story links
+    // Fetch long stories from GitHub and generate links with #Number
     async function fetchLongStories() {
-        const longStories = [
-            'LongStory1', 'LongStory2', 'LongStory3' // Replace with your actual long story filenames
-        ];
+        const longStoriesContainer = document.getElementById('long-stories');
+        const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
+        
+        try {
+            // Fetch the contents of the Long Stories/Markdowns folder
+            const response = await fetch(longStoriesUrl);
+            const data = await response.json();
 
-        const longStoryContainer = document.getElementById('long-stories');
-        longStories.forEach((story, index) => {
-            const storyLink = document.createElement('a');
-            storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/Long%20Stories.html/#${index + 1}`;
-            storyLink.classList.add('story-button');
-            storyLink.textContent = story;
-            longStoryContainer.appendChild(storyLink);
-        });
+            // Filter out only .md files (Markdown files) and create links for them
+            data.forEach((item, index) => {
+                if (item.name.endsWith('.md')) {  // We only care about Markdown files
+                    const storyLink = document.createElement('a');
+                    // Creating link with #number format for long stories
+                    storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/Long%20Stories.html/#${index + 1}`;
+                    storyLink.classList.add('story-button');
+                    storyLink.textContent = item.name.replace('.md', ''); // Display the filename without .md extension
+                    longStoriesContainer.appendChild(storyLink);
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching long stories:', error);
+        }
     }
 
     window.onload = function () {
@@ -181,6 +191,7 @@
         fetchLongStories();  // Fetch and display long stories
     };
 </script>
+
 
 
 </head>
