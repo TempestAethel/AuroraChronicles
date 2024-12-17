@@ -110,71 +110,73 @@
             background-color: var(--button-hover-color); /* Button hover color */
         }
     </style>
-    <script>
-        // Function to set the theme to localStorage
-        function saveThemePreference(isLightTheme) {
-            localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+    
+<script>
+    // Function to set the theme to localStorage
+    function saveThemePreference(isLightTheme) {
+        localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+    }
+
+    // Function to load the theme from localStorage
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        } else {
+            document.body.classList.remove('light-theme');
+        }
+    }
+
+    // Function to toggle the theme and save the preference
+    function toggleTheme() {
+        document.body.classList.toggle('light-theme');
+        const isLightTheme = document.body.classList.contains('light-theme');
+        saveThemePreference(isLightTheme);
+    }
+
+    // Fetch and display story links dynamically
+    async function fetchStoryLinks() {
+        const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/MySpace/contents/AuroraChronicles/Long%20Stories';
+        const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories/HTML';
+        const storyContainerLong = document.getElementById('long-stories');
+        const storyContainerShort = document.getElementById('short-stories');
+
+        async function fetchLinks(apiUrl, container, basePath = '') {
+            const response = await fetch(apiUrl);
+            if (!response.ok) return;
+            const data = await response.json();
+            data.forEach(file => {
+                if (file.type === 'dir') {
+                    const fileName = file.name;
+                    const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/${fileName}/${fileName}.html`;
+                    const link = document.createElement('a');
+                    link.href = storyLink;
+                    link.target = '_self';
+                    link.textContent = fileName.replace(/_/g, ' ');
+                    link.className = 'story-button';
+                    container.appendChild(link);
+                } else if (file.name.endsWith('.html')) {
+                    const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/HTML/${file.name}`;
+                    const link = document.createElement('a');
+                    link.href = storyLink;
+                    link.target = '_self';
+                    link.textContent = file.name.replace('.html', '').replace(/_/g, ' ');
+                    link.className = 'story-button';
+                    container.appendChild(link);
+                }
+            });
         }
 
-        // Function to load the theme from localStorage
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-            } else {
-                document.body.classList.remove('light-theme');
-            }
-        }
+        await fetchLinks(longStoriesUrl, storyContainerLong);
+        await fetchLinks(shortStoriesUrl, storyContainerShort);
+    }
 
-        // Function to toggle the theme and save the preference
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            const isLightTheme = document.body.classList.contains('light-theme');
-            saveThemePreference(isLightTheme);
-        }
+    window.onload = function () {
+        loadTheme();  // Load the saved theme on page load
+        fetchStoryLinks();
+    };
+</script>
 
-        // Fetch and display story links dynamically
-        async function fetchStoryLinks() {
-            const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories';
-            const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories/HTML';
-            const storyContainerLong = document.getElementById('long-stories');
-            const storyContainerShort = document.getElementById('short-stories');
-
-            async function fetchLinks(apiUrl, container, basePath = '') {
-                const response = await fetch(apiUrl);
-                if (!response.ok) return;
-                const data = await response.json();
-                data.forEach(file => {
-                    if (file.type === 'dir') {
-                        const fileName = file.name;
-                        const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/${fileName}/${fileName}.html`;
-                        const link = document.createElement('a');
-                        link.href = storyLink;
-                        link.target = '_self';
-                        link.textContent = fileName.replace(/_/g, ' ');
-                        link.className = 'story-button';
-                        container.appendChild(link);
-                    } else if (file.name.endsWith('.html')) {
-                        const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/HTML/${file.name}`;
-                        const link = document.createElement('a');
-                        link.href = storyLink;
-                        link.target = '_self';
-                        link.textContent = file.name.replace('.html', '').replace(/_/g, ' ');
-                        link.className = 'story-button';
-                        container.appendChild(link);
-                    }
-                });
-            }
-
-            await fetchLinks(longStoriesUrl, storyContainerLong);
-            await fetchLinks(shortStoriesUrl, storyContainerShort);
-        }
-
-        window.onload = function () {
-            loadTheme();  // Load the saved theme on page load
-            fetchStoryLinks();
-        };
-    </script>
 </head>
 <body>
     <header>
