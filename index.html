@@ -134,13 +134,51 @@
         saveThemePreference(isLightTheme);
     }
 
-        await fetchLinks(longStoriesUrl, storyContainerLong);
-        await fetchLinks(shortStoriesUrl, storyContainerShort);
+    // Fetch list of short stories from GitHub
+    async function fetchShortStories() {
+        const shortStoriesContainer = document.getElementById('short-stories');
+        const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories';
+        
+        try {
+            // Fetch the contents of the Short Stories folder
+            const response = await fetch(shortStoriesUrl);
+            const data = await response.json();
+
+            // Filter out only .html files and create links for them
+            data.forEach(item => {
+                if (item.name.endsWith('.html')) {
+                    const storyLink = document.createElement('a');
+                    storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/${item.name}`;
+                    storyLink.classList.add('story-button');
+                    storyLink.textContent = item.name.replace('.html', ''); // Display the filename without .html extension
+                    shortStoriesContainer.appendChild(storyLink);
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching short stories:', error);
+        }
+    }
+
+    // Function to fetch long story links
+    async function fetchLongStories() {
+        const longStories = [
+            'LongStory1', 'LongStory2', 'LongStory3' // Replace with your actual long story filenames
+        ];
+
+        const longStoryContainer = document.getElementById('long-stories');
+        longStories.forEach((story, index) => {
+            const storyLink = document.createElement('a');
+            storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/Long%20Stories.html/#${index + 1}`;
+            storyLink.classList.add('story-button');
+            storyLink.textContent = story;
+            longStoryContainer.appendChild(storyLink);
+        });
     }
 
     window.onload = function () {
         loadTheme();  // Load the saved theme on page load
-        fetchStoryLinks();
+        fetchShortStories(); // Fetch and display short stories
+        fetchLongStories();  // Fetch and display long stories
     };
 </script>
 
