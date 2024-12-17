@@ -148,28 +148,44 @@
     <!-- Include Showdown.js for Markdown rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
     <script>
-        // Function to fetch the content of a specific markdown file from the repository
-        function loadStoryContent(storyNumber) {
-            const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/Story_${storyNumber}.md`;
-            fetch(fileUrl)
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        throw new Error('File not found');
-                    }
-                })
-                .then(markdown => {
-                    const converter = new showdown.Converter();
-                    const htmlContent = converter.makeHtml(markdown);
-                    document.getElementById('markdown-content').innerHTML = htmlContent;
-                    // Update the browser title dynamically
-                    document.title = `Story ${storyNumber} - Aurora Chronicles`;
+        // Function to fetch the list of markdown files in the directory
+        function fetchFileList() {
+            const apiUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
+            return fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    return data.filter(file => file.name.endsWith('.md')).map(file => file.name);
                 })
                 .catch(error => {
-                    document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
-                    console.error('Error loading story content:', error);
+                    console.error('Error fetching file list:', error);
+                    return [];
                 });
+        }
+
+        // Function to fetch the content of a specific markdown file
+        function loadStoryContent(storyNumber) {
+            fetchFileList().then(fileList => {
+                const storyFiles = fileList;
+                const selectedStory = storyFiles[storyNumber - 1]; // Use the index from the URL hash
+                if (selectedStory) {
+                    const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/${selectedStory}`;
+                    fetch(fileUrl)
+                        .then(response => response.text())
+                        .then(markdown => {
+                            const converter = new showdown.Converter();
+                            const htmlContent = converter.makeHtml(markdown);
+                            document.getElementById('markdown-content').innerHTML = htmlContent;
+                            // Update the browser title dynamically
+                            document.title = `${selectedStory} - Aurora Chronicles`;
+                        })
+                        .catch(error => {
+                            document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
+                            console.error('Error loading story content:', error);
+                        });
+                } else {
+                    document.getElementById('markdown-content').innerHTML = `<p>Story not found.</p>`;
+                }
+            });
         }
 
         // Theme toggle functionality
@@ -199,7 +215,7 @@
         // Load the specific story based on the URL fragment (e.g., #1, #2, ...)
         window.onload = function () {
             const urlHash = window.location.hash;
-            const storyNumber = urlHash ? urlHash.substring(1) : 1; // Default to Story 1
+            const storyNumber = urlHash ? parseInt(urlHash.substring(1)) : 1; // Default to Story 1
             loadStoryContent(storyNumber);
         };
     </script>
