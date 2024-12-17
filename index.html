@@ -111,6 +111,29 @@
         }
     </style>
     <script>
+        // Function to set the theme to localStorage
+        function saveThemePreference(isLightTheme) {
+            localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+        }
+
+        // Function to load the theme from localStorage
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        }
+
+        // Function to toggle the theme and save the preference
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const isLightTheme = document.body.classList.contains('light-theme');
+            saveThemePreference(isLightTheme);
+        }
+
+        // Fetch and display story links dynamically
         async function fetchStoryLinks() {
             const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories';
             const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories/HTML';
@@ -147,11 +170,10 @@
             await fetchLinks(shortStoriesUrl, storyContainerShort);
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-        }
-
-        window.onload = fetchStoryLinks;
+        window.onload = function () {
+            loadTheme();  // Load the saved theme on page load
+            fetchStoryLinks();
+        };
     </script>
 </head>
 <body>
