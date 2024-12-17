@@ -3,212 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Needs We Carry</title>
-    <!-- Favicon -->
     <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
+    <title>The Needs We Carry</title>
     <style>
-        :root {
-            --background-dark: #121212;
-            --text-dark: #ffffff;
-            --background-light: #ffffff;
-            --text-light: #000000;
-            --primary-color: #007bff;
-            --secondary-color: #0056b3;
-            --border-radius: 10px;
-            --max-width: 900px;
-            --padding: 20px;
-        }
-
+        /* Default styles for dark mode */
         body {
-            margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-dark);
-            line-height: 1.6;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.light-theme {
-            background-color: var(--background-light);
-            color: var(--text-light);
-        }
-
-        h1, h2 {
-            font-family: 'Georgia', serif;
-            color: var(--primary-color);
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
             text-align: center;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        h1, h2, h3 {
+            color: #f1f1f1;
+            margin-bottom: 10px;
         }
 
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 20px;
+        a {
+            color: #bb86fc;
+            text-decoration: none;
         }
 
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-align: justify;
+        a:hover {
+            text-decoration: underline;
         }
 
-        .content {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: var(--padding);
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: var(--border-radius);
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
         }
 
         .toggle-btn {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background-color: #6200ea;
             color: white;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 16px;
             transition: background-color 0.3s;
         }
 
         .toggle-btn:hover {
-            background-color: var(--secondary-color);
+            background-color: #3700b3;
+        }
+
+        /* Light mode styles */
+        .light-theme {
+            background-color: #ffffff;
+            color: #121212;
+        }
+
+        .light-theme .container {
+            background-color: #f0f0f0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme h1, .light-theme h2, .light-theme h3 {
+            color: #121212;
+        }
+
+        .light-theme .toggle-btn {
+            background-color: #03a9f4;
+        }
+
+        .light-theme .toggle-btn:hover {
+            background-color: #0288d1;
         }
 
         hr {
-            border: 1px solid #ccc;
-            margin: 30px 0;
+            border: 1px solid #444;
+            margin: 20px 0;
         }
 
-        em {
-            color: var(--primary-color);
-            font-style: italic;
+        .chapter {
+            margin-bottom: 50px;
+            text-align: center;
         }
 
+        .chapter-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #03a9f4;
+            margin-top: 30px;
+        }
+
+        .chapter-content {
+            margin-top: 10px;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        .chapter-content p {
+            margin-bottom: 20px;
+        }
+
+        /* Adjusting responsiveness for smaller screens */
+        @media screen and (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            .toggle-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
-    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
-    <div class="content">
+
+    <button class="toggle-btn" id="themeToggle">Switch to Light Theme</button>
+
+    <div class="container">
         <h1>The Needs We Carry</h1>
-        <hr>
 
-        <p>In the heart of the city, nestled among narrow lanes and towering buildings, lived <strong>Isla</strong> and <strong>James</strong>. They were the kind of couple that many admired—a perfect photograph on the outside, but within, a story was unfolding. A story of love, of unspoken needs, and of the quiet struggles every relationship faces.</p>
-
-        <h2>The Beginning</h2>
-        <p>When Isla met James, it felt like a scene from her favorite novel. He was calm and steady, while she was full of energy and emotion. Their differences seemed to fit perfectly, like two puzzle pieces. Isla loved how James offered her peace and security; James adored how Isla filled his life with light and warmth. In those days, everything was simple. Conversations stretched into the night, laughter was abundant, and neither of them felt the need to explain themselves.</p>
-
-        <p>But life, as it often does, began to pile its demands upon them. James, an ambitious software developer, poured himself into his career. The weight of his goals—of providing for their future—became his driving force. Isla, a teacher who loved connecting with her students, found herself longing for more time, more connection, more words that went beyond the surface.</p>
-
-        <hr>
-
-        <h2>Unspoken Needs</h2>
-        <p>At first, Isla didn’t say much. She watched as James came home exhausted each night, his face buried in his phone or laptop. <em>“He’s doing this for us,”</em> she told herself. But as the weeks turned into months, the silence began to weigh on her heart. She missed the conversations, the deep emotional connection that had once defined them.</p>
-
-        <p>One night, as they sat together at the dinner table, Isla broke the silence. “James, can we talk?”</p>
-
-        <p>James looked up, surprised. “Sure, what’s wrong?”</p>
-
-        <p>“I don’t know,” she said, hesitating. “It just feels like we’re not… connected anymore. I miss us.”</p>
-
-        <p>James sighed, his tone defensive. “I’m working hard for us, Isla. Everything I’m doing is so we can have a good future. Doesn’t that matter to you?”</p>
-
-        <p>Isla felt tears sting her eyes. “Of course it does. But what about now? I need <em>you</em>, James. I need your time, your attention, your love. I feel like I’m alone in this.”</p>
-
-        <p>James frowned, confused and frustrated. “What more do you want from me? I’m here, aren’t I?”</p>
-
-        <p>To James, his presence in the house felt like enough. To Isla, his absence—emotionally—was louder than any words he could say.</p>
+        <div class="chapter">
+            <div class="chapter-title">The Beginning</div>
+            <div class="chapter-content">
+                <p>In the heart of the city, nestled among narrow lanes and towering buildings, lived <strong>Isla</strong> and <strong>James</strong>. They were the kind of couple that many admired—a perfect photograph on the outside, but within, a story was unfolding. A story of love, of unspoken needs, and of the quiet struggles every relationship faces.</p>
+                <p>When Isla met James, it felt like a scene from her favorite novel. He was calm and steady, while she was full of energy and emotion. Their differences seemed to fit perfectly, like two puzzle pieces. Isla loved how James offered her peace and security; James adored how Isla filled his life with light and warmth. In those days, everything was simple. Conversations stretched into the night, laughter was abundant, and neither of them felt the need to explain themselves.</p>
+                <p>But life, as it often does, began to pile its demands upon them. James, an ambitious software developer, poured himself into his career. The weight of his goals—of providing for their future—became his driving force. Isla, a teacher who loved connecting with her students, found herself longing for more time, more connection, more words that went beyond the surface.</p>
+            </div>
+        </div>
 
         <hr>
 
-        <h2>The Growing Distance</h2>
-        <p>As days passed, the gap between them grew wider. Isla threw herself into her work, finding solace in the appreciation she received from her students and colleagues. But at home, the silence between her and James became unbearable.</p>
-
-        <p>For Isla, the needs were clear: she wanted emotional connection, quality time, and open communication. She wanted to feel appreciated for the small things she did—the dinner she made, the kind words she offered, the effort she put into their relationship.</p>
-
-        <p>For James, his needs were different but equally valid. He longed for peace—a calm, quiet environment where he could focus on his goals. He wanted appreciation for his efforts, for the hours he spent working to build a secure future for both of them. He didn’t understand why Isla couldn’t see how hard he was trying.</p>
-
-        <hr>
-
-        <h2>The Breaking Point</h2>
-        <p>One evening, after a particularly long day, Isla finally broke. “James, do you even care about me anymore?”</p>
-
-        <p>James froze. “What? Of course I care about you. Why would you even say that?”</p>
-
-        <p>“Because it doesn’t feel like it!” Isla shouted. “I feel invisible to you, like I don’t matter.”</p>
-
-        <p>James rubbed his face, frustrated. “I don’t get it, Isla. I’m working myself to the bone for <em>us</em>. Isn’t that enough?”</p>
-
-        <p>“No,” Isla said softly. “It’s not. I need your love, your time, your understanding. I need you to see me—not just as someone you’re providing for, but as someone you love.”</p>
-
-        <p>James stared at her, the weight of her words settling over him. For the first time, he saw her not as someone demanding more, but as someone longing for what they once had.</p>
+        <div class="chapter">
+            <div class="chapter-title">Unspoken Needs</div>
+            <div class="chapter-content">
+                <p>At first, Isla didn’t say much. She watched as James came home exhausted each night, his face buried in his phone or laptop. *“He’s doing this for us,”* she told herself. But as the weeks turned into months, the silence began to weigh on her heart. She missed the conversations, the deep emotional connection that had once defined them.</p>
+                <p>One night, as they sat together at the dinner table, Isla broke the silence.</p>
+                <p><strong>“James, can we talk?”</strong> James looked up, surprised. “Sure, what’s wrong?”</p>
+                <p>“I don’t know,” she said, hesitating. “It just feels like we’re not… connected anymore. I miss us.”</p>
+                <p>James sighed, his tone defensive. “I’m working hard for us, Isla. Everything I’m doing is so we can have a good future. Doesn’t that matter to you?”</p>
+                <p>Isla felt tears sting her eyes. <strong>“Of course it does. But what about now? I need *you*, James. I need your time, your attention, your love. I feel like I’m alone in this.”</strong></p>
+                <p>James frowned, confused and frustrated. “What more do you want from me? I’m here, aren’t I?”</p>
+                <p>To James, his presence in the house felt like enough. To Isla, his absence—emotionally—was louder than any words he could say.</p>
+            </div>
+        </div>
 
         <hr>
 
-        <h2>Understanding Each Other</h2>
-        <p>That night, James sat alone, thinking about everything Isla had said. He realized something important: men and women often carry different needs. While he sought peace, independence, and purpose, Isla longed for connection, love, and security. Neither was wrong. Both were valid. But they had stopped meeting each other halfway.</p>
-
-        <p>The next morning, James woke up early and made Isla coffee. When she came into the kitchen, he pulled her into a hug. “I’m sorry,” he whispered. “I haven’t been listening. I haven’t been there for you.”</p>
-
-        <p>Isla blinked back tears. “I just need to feel like I matter to you, James.”</p>
-
-        <p>“You do,” he said firmly. “And I’ll show you.”</p>
-
-        <p>It wasn’t an overnight fix. They had to learn how to communicate better, how to respect each other’s needs, and how to bridge the gap between them. James learned to give Isla the emotional presence and affection she craved. Isla learned to appreciate James’s efforts and offer him the peace and support he needed.</p>
-
-        <hr>
-
-        <h2>Building Together</h2>
-        <p>In the end, Isla and James realized that love wasn’t just about grand gestures or shared dreams. It was about understanding and meeting each other’s needs—<em>emotional connection</em> for her, <em>peace and appreciation</em> for him. It was about showing up for one another in the ways that mattered most. They began to find a balance: evenings spent together without distractions, small gestures of appreciation, and open, honest communication about their struggles and dreams. </p>
-
-        <p>James started to take breaks from his work to sit with Isla, to listen, to truly be present. He realized that being there emotionally didn’t take away from his goals—it strengthened them. And Isla, in turn, gave him the respect and encouragement he craved. She learned to see his silence not as neglect but as his way of seeking peace, and she offered her support without judgment.</p>
-
-        <p>One evening, as they sat together on the balcony, watching the city lights twinkle in the distance, Isla leaned her head on James’s shoulder. “You know,” she whispered, “this is all I wanted. Us, here, like this.”</p>
-
-        <p>James smiled, pressing a kiss to her forehead. “I get that now. I’m sorry it took me so long.”</p>
-
-        <p>“It’s okay,” Isla said, looking up at him. “We’re learning. That’s what matters.”</p>
-
-        <p>For the first time in a long while, there was peace between them—a peace built on understanding, patience, and love. They both realized that relationships weren’t about perfection. They were about effort. Isla had her emotional connection, and James had his peace. Together, they learned that meeting each other’s needs didn’t mean sacrificing their own. It meant growing closer as individuals, and as partners.</p>
+        <div class="chapter">
+            <div class="chapter-title">The Growing Distance</div>
+            <div class="chapter-content">
+                <p>As days passed, the gap between them grew wider. Isla threw herself into her work, finding solace in the appreciation she received from her students and colleagues. But at home, the silence between her and James became unbearable.</p>
+                <p>For Isla, the needs were clear:</p>
+                <ul>
+                    <li>She wanted an <strong>emotional connection</strong>—to feel seen and understood.</li>
+                    <li>She longed for <strong>quality time</strong>, moments where they could reconnect without distractions.</li>
+                    <li>She needed <strong>appreciation</strong> for the effort she put into their home and their relationship.</li>
+                </ul>
+                <p>For James, his needs were different but equally valid:</p>
+                <ul>
+                    <li>He craved <strong>peace</strong>, a calm and quiet environment to focus on his work.</li>
+                    <li>He wanted <strong>appreciation</strong> for his hard work and sacrifices.</li>
+                    <li>He sought <strong>purpose</strong> in his career, something he believed was securing their future.</li>
+                </ul>
+                <p>Neither was wrong. But neither understood the other’s needs.</p>
+            </div>
+        </div>
 
         <hr>
 
-        <h2>A Shared Journey</h2>
-        <p>Over time, Isla and James became a team again, supporting one another through life’s ups and downs. Isla felt secure and loved, knowing that James valued her emotional needs. James felt appreciated and respected, knowing that Isla recognized his efforts and gave him space to pursue his goals. They spent quality time together—cooking dinners, taking walks, and simply being present for one another. The emotional walls that had once divided them were replaced by a bridge of trust and communication.</p>
-
-        <p>They learned that love wasn’t just about grand romantic gestures; it was about showing up, listening, and making an effort to understand each other’s hearts. It was about saying, <em>“I’m here for you, even when it’s hard.”</em></p>
-
-        <p>In the end, Isla and James taught each other something invaluable: that love is built not on perfection but on connection, patience, and the willingness to meet halfway. They found their peace, their appreciation, and their love—not by changing who they were but by learning to see and honor what each of them truly needed.</p>
+        <div class="chapter">
+            <div class="chapter-title">The Breaking Point</div>
+            <div class="chapter-content">
+                <p>One evening, after a particularly long day, Isla finally broke.</p>
+                <p><strong>“James, do you even care about me anymore?”</strong></p>
+                <p>James froze. “What? Of course I care about you. Why would you even say that?”</p>
+                <p>“Because it doesn’t feel like it!” Isla shouted. “I feel invisible to you, like I don’t matter.”</p>
+                <p>James rubbed his face, frustrated. “I don’t get it, Isla. I’m working myself to the bone for *us*. Isn’t that enough?”</p>
+                <p><strong>“No,”</strong> Isla said softly. “It’s not. I need your love, your time, your understanding. I need you to see me—not just as someone you’re providing for, but as someone you love.”</p>
+                <p>James stared at her, the weight of her words settling over him. For the first time, he saw her not as someone demanding more, but as someone longing for what they once had.</p>
+            </div>
+        </div>
 
         <hr>
 
-        <p>As they sat side by side, watching the stars that night, James whispered softly, “Thank you for not giving up on me.”</p>
+        <div class="chapter">
+            <div class="chapter-title">Understanding Each Other</div>
+            <div class="chapter-content">
+                <p>That night, James sat alone, thinking about everything Isla had said. He realized something important: men and women often carry different needs. While he sought <strong>peace</strong>, <strong>independence</strong>, and <strong>purpose</strong>, Isla longed for <strong>connection</strong>, <strong>love</strong>, and <strong>security</strong>. Neither was wrong. Both were valid. But they had stopped meeting each other halfway.</p>
+                <p>The next morning, James woke up early and made Isla coffee. When she came into the kitchen, he pulled her into a hug.</p>
+                <p><strong>“I’m sorry,”</strong> he whispered. “I haven’t been listening. I haven’t been there for you.”</p>
+                <p>Isla blinked back tears. <strong>“I just need to feel like I matter to you, James.”</strong></p>
+                <p><strong>“You do,”</strong> he said firmly. “And I’ll show you.”</p>
+            </div>
+        </div>
 
-        <p>Isla smiled, squeezing his hand. “Thank you for finding your way back.”</p>
+        <hr>
 
-        <p>And in that moment, under the vast night sky, they knew that they were stronger together—two imperfect people who had learned the art of love.</p>
+        <div class="chapter">
+            <div class="chapter-title">Building Together</div>
+            <div class="chapter-content">
+                <p>It wasn’t an overnight fix. They had to relearn each other’s needs and find ways to bridge the gap. James began to show up for Isla—not just physically, but emotionally. He took breaks from work to sit with her, to listen, to share his thoughts. Isla, in turn, learned to appreciate James’s efforts and support his ambitions, offering him the peace and understanding he needed.</p>
+                <p>They began spending quality time together:</p>
+                <ul>
+                    <li>Quiet dinners without distractions.</li>
+                    <li>Evening walks where they could reconnect.</li>
+                    <li>Small gestures of love—a thoughtful word, a gentle touch, a shared laugh.</li>
+                </ul>
+                <p>Together, they rebuilt their bond, stronger than before.</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="chapter">
+            <div class="chapter-title">A Shared Journey</div>
+            <div class="chapter-content">
+                <p>One evening, as they sat together on the balcony, watching the city lights twinkle in the distance, Isla leaned her head on James’s shoulder.</p>
+                <p><strong>“You know,”</strong> she whispered, <strong>“this is all I wanted. Us, here, like this.”</strong></p>
+                <p>James smiled, pressing a kiss to her forehead. <strong>“I get that now. I’m sorry it took me so long.”</strong></p>
+                <p><strong>“It’s okay,”</strong> Isla said softly. *“We’re learning. That’s what matters.”*</p>
+                <p>For the first time in a long while, there was peace between them—a peace built on understanding, patience, and love. They both realized that relationships weren’t about perfection. They were about effort, about showing up for each other in the ways that mattered most.</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="chapter">
+            <div class="chapter-title">The Art of Love</div>
+            <div class="chapter-content">
+                <p>Over time, Isla and James became a team again, supporting one another through life’s challenges. Isla felt secure and loved, knowing James valued her emotional needs. James felt appreciated and respected, knowing Isla recognized his efforts. Together, they learned that love wasn’t about grand gestures, but about:</p>
+                <ul>
+                    <li><strong>Listening when it’s hard.</strong></li>
+                    <li><strong>Showing up even when it’s inconvenient.</strong></li>
+                    <li><strong>Choosing each other, again and again.</strong></li>
+                </ul>
+                <p>In the end, Isla and James didn’t just find love—they built it, one moment, one word, and one understanding at a time.</p>
+                <p>As they sat side by side, watching the stars that night, James whispered softly, <strong>“Thank you for not giving up on me.”</strong></p>
+                <p>Isla smiled, squeezing his hand. <strong>“Thank you for finding your way back.”</strong></p>
+                <p>And in that moment, under the vast night sky, they knew they were stronger together—two imperfect people who had learned the art of love.</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Theme Toggle Script
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.classList.add(savedTheme);
-        } else {
-            document.body.classList.add('dark-theme');
-        }
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
 
-        function toggleTheme() {
-            const isDark = document.body.classList.toggle('light-theme');
-            localStorage.setItem('theme', isDark ? '' : 'light-theme');
-        }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            themeToggle.textContent = body.classList.contains('light-theme') ? 'Switch to Dark Theme' : 'Switch to Light Theme';
+        });
     </script>
 </body>
 </html>
