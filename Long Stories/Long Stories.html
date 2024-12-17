@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
-    <title>A Journey Through Gender Roles</title>
+    <title>Long Story Viewer</title>
     <style>
         /* Default styles for dark mode */
         body {
@@ -140,7 +140,7 @@
     <button class="toggle-btn" id="themeToggle">Switch to Light Theme</button>
 
     <div class="container">
-        <h1>A Journey Through Gender Roles</h1>
+        <h1 id="storyTitle">Long Story</h1>
         <div id="markdown-content">
             <!-- The content will be loaded here -->
         </div>
@@ -149,15 +149,28 @@
     <!-- Include Showdown.js for Markdown rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
     <script>
-        // Fetch the raw Markdown content from the GitHub URL
-        fetch('https://raw.githubusercontent.com/TempestAethel/MySpace/main/AuroraChronicles/Long%20Stories/Unspoken%20Expectations/Unspoken%20Expectations.md')
-            .then(response => response.text())
-            .then(markdown => {
-                var converter = new showdown.Converter();
-                var html = converter.makeHtml(markdown);
-                document.getElementById('markdown-content').innerHTML = html;
-            })
-            .catch(err => console.log('Error loading the Markdown file:', err));
+        // Function to fetch the content of a specific markdown file from the repository
+        function loadStoryContent(storyNumber) {
+            const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/Story_${storyNumber}.md`;
+            fetch(fileUrl)
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('File not found');
+                    }
+                })
+                .then(markdown => {
+                    const converter = new showdown.Converter();
+                    const htmlContent = converter.makeHtml(markdown);
+                    document.getElementById('markdown-content').innerHTML = htmlContent;
+                    document.getElementById('storyTitle').innerText = `Story ${storyNumber}`;
+                })
+                .catch(error => {
+                    document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
+                    console.error('Error loading story content:', error);
+                });
+        }
 
         // Theme toggle functionality
         const themeToggleBtn = document.getElementById('themeToggle');
@@ -182,6 +195,13 @@
                 themeToggleBtn.textContent = 'Switch to Dark Theme';
             }
         });
+
+        // Load the specific story based on the URL fragment (e.g., #1, #2, ...)
+        window.onload = function () {
+            const urlHash = window.location.hash;
+            const storyNumber = urlHash ? urlHash.substring(1) : 1; // Default to Story 1
+            loadStoryContent(storyNumber);
+        };
     </script>
 
 </body>
