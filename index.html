@@ -134,40 +134,6 @@
         saveThemePreference(isLightTheme);
     }
 
-    // Fetch and display story links dynamically
-    async function fetchStoryLinks() {
-        const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/MySpace/contents/AuroraChronicles/Long%20Stories';
-        const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories';
-        const storyContainerLong = document.getElementById('long-stories');
-        const storyContainerShort = document.getElementById('short-stories');
-
-        async function fetchLinks(apiUrl, container, basePath = '') {
-            const response = await fetch(apiUrl);
-            if (!response.ok) return;
-            const data = await response.json();
-            data.forEach(file => {
-                if (file.type === 'dir') {
-                    const fileName = file.name;
-                    // Directly link to the HTML files for long stories
-                    const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/${fileName}.html`;
-                    const link = document.createElement('a');
-                    link.href = storyLink;
-                    link.target = '_self';
-                    link.textContent = fileName.replace(/_/g, ' ');
-                    link.className = 'story-button';
-                    container.appendChild(link);
-                } else if (file.name.endsWith('.html')) { // Check for HTML files in short stories
-                    const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/${file.name}`;
-                    const link = document.createElement('a');
-                    link.href = storyLink;
-                    link.target = '_self';
-                    link.textContent = file.name.replace('.html', '').replace(/_/g, ' ');
-                    link.className = 'story-button';
-                    container.appendChild(link);
-                }
-            });
-        }
-
         await fetchLinks(longStoriesUrl, storyContainerLong);
         await fetchLinks(shortStoriesUrl, storyContainerShort);
     }
