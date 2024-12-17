@@ -148,6 +148,7 @@
             data.forEach(file => {
                 if (file.type === 'dir') {
                     const fileName = file.name;
+                    // Directly link to the HTML files for long stories
                     const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/${fileName}/${fileName}.html`;
                     const link = document.createElement('a');
                     link.href = storyLink;
@@ -155,7 +156,7 @@
                     link.textContent = fileName.replace(/_/g, ' ');
                     link.className = 'story-button';
                     container.appendChild(link);
-                } else if (file.name.endsWith('.html')) {
+                } else if (file.name.endsWith('.html')) { // Check for HTML files in short stories
                     const storyLink = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/HTML/${file.name}`;
                     const link = document.createElement('a');
                     link.href = storyLink;
@@ -176,6 +177,7 @@
         fetchStoryLinks();
     };
 </script>
+
 
 </head>
 <body>
