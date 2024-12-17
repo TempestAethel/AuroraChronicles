@@ -9,12 +9,12 @@
     <title>Story Hub</title>
     <style>
         :root {
-            --background-dark: #121212;
-            --text-dark: #ffffff;
-            --background-light: #ffffff;
-            --text-light: #000000;
-            --button-color: #4e73df;
-            --button-hover-color: #375a7f;
+            --background-dark: #121212; /* Dark background */
+            --text-dark: #ffffff; /* Light text on dark background */
+            --background-light: #ffffff; /* Light background */
+            --text-light: #000000; /* Dark text on light background */
+            --highlight-color: #4e73df; /* Highlight color for text and buttons */
+            --button-hover-color: #375a7f; /* Hover color for buttons */
         }
 
         /* General Reset */
@@ -27,16 +27,16 @@
         /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-dark);
+            background-color: var(--background-dark); /* Set dark background */
+            color: var(--text-dark); /* Light text color */
             line-height: 1.6;
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
         }
 
         body.light-theme {
-            background-color: var(--background-light);
-            color: var(--text-light);
+            background-color: var(--background-light); /* Light theme background */
+            color: var(--text-light); /* Dark text on light background */
         }
 
         /* Header Styling */
@@ -46,14 +46,14 @@
         }
 
         h1 {
-            color: var(--button-color);
+            color: var(--highlight-color); /* Use highlight color for header */
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
         h2 {
             margin: 20px 0 10px;
-            color: var(--button-color);
+            color: var(--highlight-color); /* Use highlight color for sub-headers */
             font-size: 1.8rem;
             text-align: center;
         }
@@ -61,7 +61,7 @@
         /* Buttons */
         .story-button {
             display: inline-block;
-            background: var(--button-color);
+            background: var(--highlight-color); /* Highlight color for buttons */
             color: #fff;
             text-decoration: none;
             padding: 10px 20px;
@@ -72,7 +72,7 @@
         }
 
         .story-button:hover {
-            background: var(--button-hover-color);
+            background: var(--button-hover-color); /* Darker color on hover */
         }
 
         /* Sections */
@@ -99,7 +99,7 @@
             top: 10px;
             right: 10px;
             padding: 10px 20px;
-            background-color: var(--button-color);
+            background-color: var(--highlight-color); /* Button background in highlight color */
             color: white;
             border: none;
             border-radius: 5px;
@@ -107,7 +107,7 @@
         }
 
         .toggle-btn:hover {
-            background-color: var(--button-hover-color);
+            background-color: var(--button-hover-color); /* Button hover color */
         }
     </style>
     <script>
