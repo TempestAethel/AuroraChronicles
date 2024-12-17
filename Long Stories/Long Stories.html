@@ -140,7 +140,6 @@
     <button class="toggle-btn" id="themeToggle">Switch to Light Theme</button>
 
     <div class="container">
-        <h1 id="storyTitle">Long Story</h1>
         <div id="markdown-content">
             <!-- The content will be loaded here -->
         </div>
@@ -164,7 +163,8 @@
                     const converter = new showdown.Converter();
                     const htmlContent = converter.makeHtml(markdown);
                     document.getElementById('markdown-content').innerHTML = htmlContent;
-                    document.getElementById('storyTitle').innerText = `Story ${storyNumber}`;
+                    // Update the browser title dynamically
+                    document.title = `Story ${storyNumber} - Aurora Chronicles`;
                 })
                 .catch(error => {
                     document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
