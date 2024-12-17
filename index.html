@@ -174,7 +174,7 @@
                 if (item.name.endsWith('.md')) {  // We only care about Markdown files
                     const storyLink = document.createElement('a');
                     // Creating link with #number format for long stories
-                    storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/Long%20Stories.html/#${index + 1}`;
+                    storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/#${index + 1}`;
                     storyLink.classList.add('story-button');
                     storyLink.textContent = item.name.replace('.md', ''); // Display the filename without .md extension
                     longStoriesContainer.appendChild(storyLink);
