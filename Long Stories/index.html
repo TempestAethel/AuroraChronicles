@@ -147,7 +147,7 @@
 
     <!-- Include Showdown.js for Markdown rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
- <script>
+<script>
     // Function to fetch the list of markdown files in the directory
     function fetchFileList() {
         const apiUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
@@ -165,7 +165,7 @@
     // Function to fetch the content of a specific markdown file from raw GitHub URL
     function loadStoryContent(storyName) {
         fetchFileList().then(fileList => {
-            const selectedStory = fileList.find(story => story === storyName); // Find the file name matching the hash
+            const selectedStory = fileList.find(story => story === storyName); // Check if the story name matches the hash
             if (selectedStory) {
                 const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/${selectedStory}.md`; // Construct the raw URL
 
@@ -219,8 +219,9 @@
 
     // Load the specific story based on the URL fragment (e.g., #Story1, #Story2, ...)
     window.onload = function () {
-        const urlHash = window.location.hash;
-        const storyName = urlHash ? urlHash.substring(1) : ''; // Extract file name from the hash
+        const urlHash = window.location.hash; // Get the URL hash
+        const storyName = urlHash ? decodeURIComponent(urlHash.substring(1)) : ''; // Decode the hash and remove the '#' symbol
+
         if (storyName) {
             loadStoryContent(storyName);  // Load story content by its name
         } else {
@@ -229,6 +230,7 @@
         }
     };
 </script>
+
 
 
 
