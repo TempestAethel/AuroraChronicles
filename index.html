@@ -159,31 +159,31 @@
         }
     }
 
-    // Fetch long stories from GitHub and generate links with #Number
     async function fetchLongStories() {
-        const longStoriesContainer = document.getElementById('long-stories');
-        const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
-        
-        try {
-            // Fetch the contents of the Long Stories/Markdowns folder
-            const response = await fetch(longStoriesUrl);
-            const data = await response.json();
+    const longStoriesContainer = document.getElementById('long-stories');
+    const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
 
-            // Filter out only .md files (Markdown files) and create links for them
-            data.forEach((item, index) => {
-                if (item.name.endsWith('.md')) {  // We only care about Markdown files
-                    const storyLink = document.createElement('a');
-                    // Creating link with #number format for long stories
-                    storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/#${index + 1}`;
-                    storyLink.classList.add('story-button');
-                    storyLink.textContent = item.name.replace('.md', ''); // Display the filename without .md extension
-                    longStoriesContainer.appendChild(storyLink);
-                }
-            });
-        } catch (error) {
-            console.error('Error fetching long stories:', error);
-        }
+    try {
+        // Fetch the contents of the Long Stories/Markdowns folder
+        const response = await fetch(longStoriesUrl);
+        const data = await response.json();
+
+        // Filter out only .md files (Markdown files) and create links for them
+        data.forEach((item) => {
+            if (item.name.endsWith('.md')) {  // We only care about Markdown files
+                const storyLink = document.createElement('a');
+                // Creating link with the file name (without .md extension) as hash
+                const fileNameWithoutExtension = item.name.replace('.md', '');
+                storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/#${fileNameWithoutExtension}`;
+                storyLink.classList.add('story-button');
+                storyLink.textContent = fileNameWithoutExtension; // Display the filename without .md extension
+                longStoriesContainer.appendChild(storyLink);
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching long stories:', error);
     }
+}
 
     window.onload = function () {
         loadTheme();  // Load the saved theme on page load
