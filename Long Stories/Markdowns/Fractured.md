@@ -167,7 +167,7 @@
 **Author:** AuroraHeart  
 
 ---
-
+<a id="Chapter1"></a>
 ## **Chapter 1: The Experiment (Part 1)**  
 
 The sterile hum of fluorescent lights buzzed faintly above, their monotonous drone amplified by the suffocating silence of the lab. Avery Sinclair stared at the device resting on the table before them—a polished metal cylinder, no larger than a coffee thermos, cradled in a tangle of wires and blinking LEDs. It was unassuming, almost banal in appearance, yet it held within it the culmination of five grueling years of research.  
