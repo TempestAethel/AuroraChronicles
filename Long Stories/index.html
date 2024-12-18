@@ -147,7 +147,7 @@
 
     <!-- Include Showdown.js for Markdown rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
-   <script>
+ <script>
     // Function to fetch the list of markdown files in the directory
     function fetchFileList() {
         const apiUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
@@ -162,20 +162,25 @@
             });
     }
 
-    // Function to fetch the content of a specific markdown file
+    // Function to fetch the content of a specific markdown file from raw GitHub URL
     function loadStoryContent(storyName) {
         fetchFileList().then(fileList => {
-            const storyFiles = fileList;
-            const selectedStory = storyFiles.find(story => story === storyName); // Use the name from the hash
+            const selectedStory = fileList.find(story => story === storyName); // Find the file name matching the hash
             if (selectedStory) {
-                const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/${selectedStory}.md`;
+                const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/${selectedStory}.md`; // Construct the raw URL
+
+                // Fetch the raw content of the selected markdown file
                 fetch(fileUrl)
-                    .then(response => response.text())
+                    .then(response => response.text()) // Get the raw markdown data as text
                     .then(markdown => {
+                        // Convert markdown to HTML
                         const converter = new showdown.Converter();
                         const htmlContent = converter.makeHtml(markdown);
+                        
+                        // Display the content in the #markdown-content container
                         document.getElementById('markdown-content').innerHTML = htmlContent;
-                        // Update the browser title dynamically
+
+                        // Dynamically update the browser title
                         document.title = `${selectedStory} - Aurora Chronicles`;
                     })
                     .catch(error => {
@@ -224,6 +229,7 @@
         }
     };
 </script>
+
 
 
 </body>
