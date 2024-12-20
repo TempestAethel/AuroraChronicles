@@ -1,10 +1,14 @@
 ### Chapter 1: The Archetype of the Modern Man  
-
-#### **Historical Archetypes of Masculinity**  
+<details> #### **Historical Archetypes of Masculinity** 
+  <summary>Click to see more</summary>
 
 The idea of masculinity has evolved throughout history, shaped by cultural norms, societal needs, and historical events. In ancient times, masculinity was closely linked to physical strength and dominance. Hunters and warriors were revered as the pinnacle of male achievement, their worth tied to their ability to protect, provide, and conquer. In medieval societies, the archetype of the knight emerged—chivalrous, stoic, and bound by a strict code of honor. This figure not only embodied physical prowess but also moral fortitude, setting a standard that lingered long after swords and shields were replaced by other forms of influence.  
 
 In the industrial age, masculinity shifted again, focusing on the man as the breadwinner. The ideal man became one who could work tirelessly to support his family, embodying resilience and sacrifice. With societal progress and gender roles beginning to blur, these archetypes were challenged, but their echoes still influence modern expectations. Understanding these historical frameworks helps contextualize why certain stereotypes persist and how they subtly shape today’s expectations of men.  
+</details>
+ 
+
+
 
 #### **The “Strong, Silent” Ideal**  
 
