@@ -46,6 +46,28 @@
             color: var(--text-light);
         }
 
+        body.full-width {
+            max-width: 100%; /* Use full width */
+        }
+        
+        .story-section {
+            border: 2px solid var(--highlight-color);
+            border-radius: 5px;
+            padding: 15px; /* Reduced height */
+            margin: 20px 0;
+            width: 100%; /* Make sections responsive */
+            max-width: 960px; /* Limit max width for larger screens */
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        body.full-width .story-section {
+            max-width: none; /* Allow story sections to take full width */
+        }
+        
+
         header {
             text-align: center;
             margin-bottom: 20px;
@@ -62,19 +84,6 @@
             color: #A2DFF7; /* Light Cyan */
             font-size: 1.8rem;
             text-align: center;
-        }
-
-        .story-section {
-            border: 2px solid var(--highlight-color);
-            border-radius: 5px;
-            padding: 15px; /* Reduced height */
-            margin: 20px 0;
-            width: 100%;
-            max-width: var(--container-width);
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .story-buttons {
@@ -107,19 +116,18 @@
         }
 
         .settings-btn {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        padding: 15px 20px; /* Increased padding */
-        font-size: 18px; /* Increased font size */
-        background-color: var(--highlight-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        z-index: 10;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 15px 20px; /* Increased padding */
+            font-size: 18px; /* Increased font size */
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
         }
-
 
         .settings-menu {
             display: none;
@@ -154,13 +162,17 @@
         }
 
         #markdown-content {
-            width: 100%;
-            max-width: var(--container-width);
+            width: 100%; /* Make it responsive */
+            max-width: 960px; /* Limit max width for larger screens */
             background: rgba(255, 255, 255, 0.2);
             padding: 15px; /* Reduced height */
             border-radius: 5px;
             margin-top: 20px;
             display: none;
+        }
+        
+        body.full-width #markdown-content {
+            max-width: none; /* Allow markdown content to take full width */
         }
 
         /* Markdown Styles */
@@ -236,6 +248,20 @@
             const options = document.querySelectorAll('.font-size-option');
             options.forEach(option => option.classList.remove('selected'));
             document.querySelector(`.font-size-option[data-size="${size}"]`).classList.add('selected');
+        }
+
+        function toggleLayout() {
+            const isFullWidth = document.body.classList.toggle('full-width');
+            localStorage.setItem('layout', isFullWidth ? 'full' : 'fixed');
+        }
+
+        function loadLayout() {
+            const savedLayout = localStorage.getItem('layout');
+            if (savedLayout === 'full') {
+                document.body.classList.add('full-width');
+            } else {
+                document.body.classList.remove('full-width');
+            }
         }
 
         const stories = {
@@ -330,6 +356,8 @@
             } else if (option.startsWith('size-')) {
                 const size = option.split('-')[1];
                 changeFontSize(size);
+            } else if (option === 'toggleLayout') {
+                toggleLayout();
             } else if (option === 'showMenu') {
                 showStoryMenu();
             }
@@ -343,6 +371,7 @@
 
         window.onload = function () {
             loadTheme();
+            loadLayout(); // Load the layout preference
             loadStories();
         };
     </script>
@@ -357,6 +386,7 @@
     <div id="settings-menu" class="settings-menu">
         <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
         <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
+        <div class="menu-option" onclick="toggleMenuOption('toggleLayout')">Toggle Layout</div>
         <div class="menu-option">Select Font:</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Arial')">Arial</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Georgia')">Georgia</div>
@@ -369,7 +399,6 @@
         <div class="menu-option font-size-option" onclick="toggleMenuOption('size-18')">18px</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('size-20')">20px</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('size-22')">22px</div>
-        
     </div>
     
     <div id="story-sections"></div>
