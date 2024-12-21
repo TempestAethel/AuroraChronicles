@@ -99,6 +99,7 @@
 
         h3 {
             color: #03a9f4; /* Lighter Cyan for h3 */
+            cursor: pointer; /* Change cursor to indicate clickable */
         }
 
         h4 {
@@ -115,6 +116,7 @@
             margin-top: 10px;
             font-size: 1.1em;
             text-align: justify; /* Keeping text left-aligned */
+            display: none; /* Hide dropdown content by default */
         }
 
         .chapter-content p {
@@ -147,92 +149,97 @@
 
     <!-- Include Showdown.js for Markdown rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
-<script>
-    // Function to fetch the list of markdown files in the directory
-    function fetchFileList() {
-        const apiUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
-        return fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                return data.filter(file => file.name.endsWith('.md')).map(file => file.name.replace('.md', ''));
-            })
-            .catch(error => {
-                console.error('Error fetching file list:', error);
-                return [];
+    <script>
+        // Function to fetch the list of markdown files in the directory
+        function fetchFileList() {
+            const apiUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
+            return fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    return data.filter(file => file.name.endsWith('.md')).map(file => file.name.replace('.md', ''));
+                })
+                .catch(error => {
+                    console.error('Error fetching file list:', error);
+                    return [];
+                });
+        }
+
+        // Function to fetch the content of a specific markdown file from raw GitHub URL
+        function loadStoryContent(storyName) {
+            fetchFileList().then(fileList => {
+                const selectedStory = fileList.find(story => story === storyName); // Check if the story name matches the hash
+                if (selectedStory) {
+                    const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/${selectedStory}.md`; // Construct the raw URL
+
+                    // Fetch the raw content of the selected markdown file
+                    fetch(fileUrl)
+                        .then(response => response.text()) // Get the raw markdown data as text
+                        .then(markdown => {
+                            // Convert markdown to HTML
+                            const converter = new showdown.Converter();
+                            const htmlContent = converter.makeHtml(markdown);
+                            
+                            // Display the content in the #markdown-content container
+                            document.getElementById('markdown-content').innerHTML = htmlContent;
+
+                            // Make h3 elements toggleable
+                            const chapterContents = document.querySelectorAll('.chapter-content');
+                            chapterContents.forEach(chapter => {
+                                const toggleHeading = chapter.previousElementSibling; // h3 heading
+                                toggleHeading.addEventListener('click', () => {
+                                    chapter.style.display = chapter.style.display === 'none' ? 'block' : 'none';
+                                });
+                            });
+
+                            // Dynamically update the browser title
+                            document.title = `${selectedStory} - Aurora Chronicles`;
+                        })
+                        .catch(error => {
+                            document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
+                            console.error('Error loading story content:', error);
+                        });
+                } else {
+                    document.getElementById('markdown-content').innerHTML = `<p>Story not found.</p>`;
+                }
             });
-    }
+        }
 
-    // Function to fetch the content of a specific markdown file from raw GitHub URL
-    function loadStoryContent(storyName) {
-        fetchFileList().then(fileList => {
-            const selectedStory = fileList.find(story => story === storyName); // Check if the story name matches the hash
-            if (selectedStory) {
-                const fileUrl = `https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Long%20Stories/Markdowns/${selectedStory}.md`; // Construct the raw URL
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
 
-                // Fetch the raw content of the selected markdown file
-                fetch(fileUrl)
-                    .then(response => response.text()) // Get the raw markdown data as text
-                    .then(markdown => {
-                        // Convert markdown to HTML
-                        const converter = new showdown.Converter();
-                        const htmlContent = converter.makeHtml(markdown);
-                        
-                        // Display the content in the #markdown-content container
-                        document.getElementById('markdown-content').innerHTML = htmlContent;
+        // Check if theme is saved in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+            themeToggleBtn.textContent = savedTheme === 'light-theme' ? 'Switch to Dark Theme' : 'Switch to Light Theme';
+        }
 
-                        // Dynamically update the browser title
-                        document.title = `${selectedStory} - Aurora Chronicles`;
-                    })
-                    .catch(error => {
-                        document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
-                        console.error('Error loading story content:', error);
-                    });
+        // Toggle theme when the button is clicked
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                localStorage.setItem('theme', 'dark-theme');
+                themeToggleBtn.textContent = 'Switch to Light Theme';
             } else {
-                document.getElementById('markdown-content').innerHTML = `<p>Story not found.</p>`;
+                body.classList.add('light-theme');
+                localStorage.setItem('theme', 'light-theme');
+                themeToggleBtn.textContent = 'Switch to Dark Theme';
             }
         });
-    }
 
-    // Theme toggle functionality
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const body = document.body;
+        // Load the specific story based on the URL fragment (e.g., #Story1, #Story2, ...)
+        window.onload = function () {
+            const urlHash = window.location.hash; // Get the URL hash
+            const storyName = urlHash ? decodeURIComponent(urlHash.substring(1)) : ''; // Decode the hash and remove the '#' symbol
 
-    // Check if theme is saved in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        body.classList.add(savedTheme);
-        themeToggleBtn.textContent = savedTheme === 'light-theme' ? 'Switch to Dark Theme' : 'Switch to Light Theme';
-    }
-
-    // Toggle theme when the button is clicked
-    themeToggleBtn.addEventListener('click', () => {
-        if (body.classList.contains('light-theme')) {
-            body.classList.remove('light-theme');
-            localStorage.setItem('theme', 'dark-theme');
-            themeToggleBtn.textContent = 'Switch to Light Theme';
-        } else {
-            body.classList.add('light-theme');
-            localStorage.setItem('theme', 'light-theme');
-            themeToggleBtn.textContent = 'Switch to Dark Theme';
-        }
-    });
-
-    // Load the specific story based on the URL fragment (e.g., #Story1, #Story2, ...)
-    window.onload = function () {
-        const urlHash = window.location.hash; // Get the URL hash
-        const storyName = urlHash ? decodeURIComponent(urlHash.substring(1)) : ''; // Decode the hash and remove the '#' symbol
-
-        if (storyName) {
-            loadStoryContent(storyName);  // Load story content by its name
-        } else {
-            // If no hash is found, optionally load a default story or handle accordingly
-            loadStoryContent('Story1'); // Default to 'Story1' if no hash is found
-        }
-    };
-</script>
-
-
-
-
+            if (storyName) {
+                loadStoryContent(storyName);  // Load story content by its name
+            } else {
+                // If no hash is found, optionally load a default story or handle accordingly
+                loadStoryContent('Story1'); // Default to 'Story1' if no hash is found
+            }
+        };
+    </script>
 </body>
 </html>
