@@ -101,20 +101,38 @@
             color: #aaa;
         }
 
-        .toggle-btn {
+        .settings-btn {
             position: fixed;
             top: 10px;
             right: 10px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             background-color: var(--highlight-color);
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            z-index: 10;
         }
 
-        .toggle-btn:hover {
-            background-color: var(--button-hover-color);
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 11;
+        }
+
+        .menu-option {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .menu-option:hover {
+            background-color: var(--highlight-color);
+            color: #fff;
         }
 
         #markdown-content {
@@ -125,26 +143,6 @@
             border-radius: 5px;
             margin-top: 20px;
             display: none;
-        }
-
-        .menu-button {
-            display: none;
-            background: var(--highlight-color);
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 600px) {
-            .story-section {
-                display: none; /* Hide sections on small screens */
-            }
-
-            .menu-button {
-                display: block; /* Show menu button */
-            }
         }
     </style>
     
@@ -223,10 +221,8 @@
         }
 
         function loadStory(url, title) {
-            // Update the URL to allow page refresh
             window.history.pushState({title: title}, title, `?story=${encodeURIComponent(title)}`);
 
-            // Fetch and display the story content
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -241,7 +237,7 @@
                     document.getElementById('markdown-content').style.display = 'block';
                     document.title = `${title} - Aurora Chronicles`;
 
-                    // Hide story sections
+                    // Hide story sections and show markdown content
                     document.getElementById('story-sections').style.display = 'none';
                 })
                 .catch(error => {
@@ -251,8 +247,22 @@
         }
 
         function showMenu() {
-            // Refresh the page to reset
-            location.reload();
+            const menu = document.getElementById('settings-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleMenuOption(option) {
+            if (option === 'toggleTheme') {
+                toggleTheme();
+            } else if (option === 'showMenu') {
+                showStoryMenu();
+            }
+            showMenu(); // Hide the settings menu after selection
+        }
+
+        function showStoryMenu() {
+            document.getElementById('story-sections').style.display = 'block';
+            document.getElementById('markdown-content').style.display = 'none';
         }
 
         window.onload = function () {
@@ -268,7 +278,11 @@
         <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
-    <button class="menu-button" onclick="showMenu()">Show Stories</button>
+    <button class="settings-btn" onclick="showMenu()">Settings</button>
+    <div id="settings-menu" class="settings-menu">
+        <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
+        <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
+    </div>
     
     <div id="story-sections"></div>
     <div id="markdown-content"></div>
