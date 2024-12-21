@@ -7,214 +7,277 @@
     <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
     <title>Story Hub</title>
     <style>
-        :root {
-            --background-dark: #121212;
-            --text-dark: #ffffff;
-            --background-light: #ffffff;
-            --text-light: #000000;
-            --highlight-color: #4e73df;
-            --button-hover-color: #375a7f;
-            --container-width: 90vw; /* 90% of viewport width */
-            --settings-bg-dark: rgba(255, 255, 255, 0.1);
-            --settings-bg-light: rgba(0, 0, 0, 0.7);
-            --font-size: 16px; /* Default font size */
-            --font-family: Arial, sans-serif; /* Default font */
-        }
+:root {
+    --background-dark: #121212;
+    --text-dark: #ffffff;
+    --background-light: #ffffff;
+    --text-light: #000000;
+    --highlight-color: #4e73df;
+    --button-hover-color: #375a7f;
+    --container-width: 90vw; /* 90% of viewport width */
+    --settings-bg-dark: rgba(255, 255, 255, 0.1);
+    --settings-bg-light: rgba(0, 0, 0, 0.7);
+    --font-size: 16px; /* Default font size */
+    --font-family: Arial, sans-serif; /* Default font */
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: var(--font-family);
-            background-color: var(--background-dark);
-            color: var(--text-dark);
-            line-height: 1.6;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-size);
-        }
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size);
+    min-height: 100vh;
+}
 
-        body.light-theme {
-            background-color: var(--background-light);
-            color: var(--text-light);
-        }
+body.light-theme {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
 
-        body.full-width {
-            max-width: 100%; /* Use full width */
-        }
-        
-        .story-section {
-            border: 2px solid var(--highlight-color);
-            border-radius: 5px;
-            padding: 15px; /* Reduced height */
-            margin: 20px 0;
-            width: 100%; /* Make sections responsive */
-            max-width: 960px; /* Limit max width for larger screens */
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        body.full-width .story-section {
-            max-width: none; /* Allow story sections to take full width */
-        }
-        
+body.full-width {
+    max-width: 100%; /* Use full width */
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.story-section {
+    border: 2px solid var(--highlight-color);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 960px;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    word-wrap: break-word;
+}
 
-        h1 {
-            color: #3A9AD9; /* Cool Blue */
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+body.full-width .story-section {
+    max-width: none; /* Allow story sections to take full width */
+}
 
-        h2 {
-            margin: 20px 0 10px;
-            color: #A2DFF7; /* Light Cyan */
-            font-size: 1.8rem;
-            text-align: center;
-        }
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
 
-        .story-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 10px;
-        }
+h1 {
+    color: #3A9AD9;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
 
-        .story-button {
-            background: var(--highlight-color);
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin: 8px;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s ease;
-            text-align: center;
-        }
+h2 {
+    margin: 20px 0 10px;
+    color: #A2DFF7;
+    font-size: 1.8rem;
+    text-align: center;
+}
 
-        .story-button:hover {
-            background: var(--button-hover-color);
-        }
+.story-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
 
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #aaa;
-        }
+.story-button {
+    background: var(--highlight-color);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    text-align: center;
+}
 
-        .settings-btn {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 15px 20px; /* Increased padding */
-            font-size: 18px; /* Increased font size */
-            background-color: var(--highlight-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 10;
-        }
+.story-button:hover {
+    background: var(--button-hover-color);
+}
 
-        .settings-menu {
-            display: none;
-            position: fixed;
-            top: 50px;
-            right: 10px;
-            background-color: var(--settings-bg-dark);
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            z-index: 11;
-            transition: background-color 0.3s;
-        }
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #aaa;
+    width: 100%;
+}
 
-        body.light-theme .settings-menu {
-            background-color: var(--settings-bg-light);
-            color: var(--text-light);
-        }
+.settings-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 15px 20px;
+    font-size: 18px;
+    background-color: var(--highlight-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
 
-        .menu-option {
-            padding: 10px 15px;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
+.settings-menu {
+    display: none;
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    background-color: var(--settings-bg-dark);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 11;
+    transition: background-color 0.3s;
+}
 
-        body.light-theme .menu-option {
-            color: var(--text-light);
-        }
+body.light-theme .settings-menu {
+    background-color: var(--settings-bg-light);
+    color: var(--text-light);
+}
 
-        .menu-option:hover {
-            background-color: var(--highlight-color);
-            color: #fff;
-        }
+.menu-option {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--text-dark);
+}
 
-        #markdown-content {
-            width: 100%; /* Make it responsive */
-            max-width: 960px; /* Limit max width for larger screens */
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px; /* Reduced height */
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        body.full-width #markdown-content {
-            max-width: none; /* Allow markdown content to take full width */
-        }
+body.light-theme .menu-option {
+    color: var(--text-light);
+}
 
-        /* Markdown Styles */
-        h1, h2, h3, h4 {
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
+.menu-option:hover {
+    background-color: var(--highlight-color);
+    color: #fff;
+}
 
-        h1 {
-            color: #3A9AD9; /* Cool Blue */
-            font-size: 2.5em;
-        }
+#markdown-content {
+    width: 100%;
+    max-width: 960px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: none;
+}
 
-        h2 {
-            color: #A2DFF7; /* Light Cyan */
-            font-size: 2em;
-        }
+body.full-width #markdown-content {
+    max-width: none;
+}
 
-        h3 {
-            color: #88B04B; /* Green */
-            font-size: 1.75em;
-        }
+h1, h2, h3, h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
 
-        h4 {
-            color: #F7CAC9; /* Pink */
-            font-size: 1.5em;
-        }
+h1 {
+    color: #3A9AD9;
+    font-size: 2.5em;
+}
 
-        p {
-            margin: 1em 0;
-        }
+h2 {
+    color: #A2DFF7;
+    font-size: 2em;
+}
 
-        /* Font size controls */
-        .font-size-option {
-            padding: 10px 15px;
-            cursor: pointer;
-        }
+h3 {
+    color: #88B04B;
+    font-size: 1.75em;
+}
 
-        .font-size-option.selected {
-            background-color: var(--highlight-color);
-            color: #fff;
-        }
+h4 {
+    color: #F7CAC9;
+    font-size: 1.5em;
+}
+
+p {
+    margin: 1em 0;
+}
+
+/* Font size controls */
+.font-size-option {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.font-size-option.selected {
+    background-color: var(--highlight-color);
+    color: #fff;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .story-section {
+        padding: 10px;
+        margin: 15px 0;
+    }
+
+    .story-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .settings-btn {
+        padding: 12px 16px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .story-section {
+        padding: 8px;
+        margin: 12px 0;
+    }
+
+    .story-button {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+
+    .settings-btn {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+}
+
     </style>
     
     <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
