@@ -17,6 +17,7 @@
             --container-width: 800px;
             --settings-bg-dark: rgba(255, 255, 255, 0.1);
             --settings-bg-light: rgba(0, 0, 0, 0.7);
+            --font-size: 16px;
         }
 
         * {
@@ -36,6 +37,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: var(--font-size);
         }
 
         body.light-theme {
@@ -121,7 +123,7 @@
             position: absolute;
             top: 50px;
             right: 10px;
-            background-color: var(--settings-bg-dark); /* Dark background for dark theme */
+            background-color: var(--settings-bg-dark);
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             z-index: 11;
@@ -129,23 +131,23 @@
         }
 
         body.light-theme .settings-menu {
-            background-color: var(--settings-bg-light); /* Light background for light theme */
-            color: var(--text-light); /* Light text color */
+            background-color: var(--settings-bg-light);
+            color: var(--text-light);
         }
 
         .menu-option {
             padding: 10px 15px;
             cursor: pointer;
-            color: var(--text-dark); /* Adjust text color for dark theme */
+            color: var(--text-dark);
         }
 
         body.light-theme .menu-option {
-            color: var(--text-light); /* Light text color for light theme */
+            color: var(--text-light);
         }
 
         .menu-option:hover {
-            background-color: var(--highlight-color); /* Use your highlight color for hover */
-            color: #fff; /* Change text color to white on hover */
+            background-color: var(--highlight-color);
+            color: #fff;
         }
 
         #markdown-content {
@@ -156,6 +158,42 @@
             border-radius: 5px;
             margin-top: 20px;
             display: none;
+        }
+
+        /* Markdown Styles */
+        h1, h2, h3, h4 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            color: #FF6F61; /* Coral */
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #6B5B93; /* Lavender */
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #88B04B; /* Green */
+            font-size: 1.75em;
+        }
+
+        h4 {
+            color: #F7CAC9; /* Pink */
+            font-size: 1.5em;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        /* Font size controls */
+        .font-size-option {
+            padding: 10px 15px;
+            cursor: pointer;
         }
     </style>
     
@@ -179,6 +217,10 @@
             document.body.classList.toggle('light-theme');
             const isLightTheme = document.body.classList.contains('light-theme');
             saveThemePreference(isLightTheme);
+        }
+
+        function changeFontSize(size) {
+            document.documentElement.style.setProperty('--font-size', size);
         }
 
         const stories = {
@@ -267,6 +309,10 @@
         function toggleMenuOption(option) {
             if (option === 'toggleTheme') {
                 toggleTheme();
+            } else if (option === 'fontSize') {
+                const currentSize = getComputedStyle(document.documentElement).getPropertyValue('--font-size');
+                const newSize = currentSize === '16px' ? '18px' : '16px'; // Toggle between two sizes
+                changeFontSize(newSize);
             } else if (option === 'showMenu') {
                 showStoryMenu();
             }
@@ -294,6 +340,7 @@
     <button class="settings-btn" onclick="showMenu()">Settings</button>
     <div id="settings-menu" class="settings-menu">
         <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
+        <div class="menu-option" onclick="toggleMenuOption('fontSize')">Toggle Font Size</div>
         <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
     </div>
     
