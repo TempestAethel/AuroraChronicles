@@ -18,6 +18,7 @@
             --settings-bg-dark: rgba(255, 255, 255, 0.1);
             --settings-bg-light: rgba(0, 0, 0, 0.7);
             --font-size: 16px;
+            --font-family: Arial, sans-serif; /* Default font */
         }
 
         * {
@@ -27,7 +28,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: var(--font-family);
             background-color: var(--background-dark);
             color: var(--text-dark);
             line-height: 1.6;
@@ -47,7 +48,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -66,7 +67,7 @@
         .story-section {
             border: 2px solid var(--highlight-color);
             border-radius: 5px;
-            padding: 20px;
+            padding: 15px; /* Reduced height */
             margin: 20px 0;
             width: 100%;
             max-width: var(--container-width);
@@ -154,7 +155,7 @@
             width: 100%;
             max-width: var(--container-width);
             background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
+            padding: 15px; /* Reduced height */
             border-radius: 5px;
             margin-top: 20px;
             display: none;
@@ -219,8 +220,8 @@
             saveThemePreference(isLightTheme);
         }
 
-        function changeFontSize(size) {
-            document.documentElement.style.setProperty('--font-size', size);
+        function changeFont(font) {
+            document.documentElement.style.setProperty('--font-family', font);
         }
 
         const stories = {
@@ -309,10 +310,9 @@
         function toggleMenuOption(option) {
             if (option === 'toggleTheme') {
                 toggleTheme();
-            } else if (option === 'fontSize') {
-                const currentSize = getComputedStyle(document.documentElement).getPropertyValue('--font-size');
-                const newSize = currentSize === '16px' ? '18px' : '16px'; // Toggle between two sizes
-                changeFontSize(newSize);
+            } else if (option.startsWith('font')) {
+                const font = option.split('-')[1];
+                changeFont(font);
             } else if (option === 'showMenu') {
                 showStoryMenu();
             }
@@ -334,13 +334,17 @@
     <header>
         <h1>Aurora Chronicles - Story Hub</h1>
         <p>Your gateway to explore long and short stories.</p>
-        <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
     <button class="settings-btn" onclick="showMenu()">Settings</button>
     <div id="settings-menu" class="settings-menu">
         <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
-        <div class="menu-option" onclick="toggleMenuOption('fontSize')">Toggle Font Size</div>
+        <div class="menu-option">Select Font:</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Arial')">Arial</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Georgia')">Georgia</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Tahoma')">Tahoma</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Verdana')">Verdana</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Comic Sans MS')">Comic Sans MS</div>
         <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
     </div>
     
