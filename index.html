@@ -15,6 +15,8 @@
             --highlight-color: #4e73df;
             --button-hover-color: #375a7f;
             --container-width: 800px;
+            --settings-bg-dark: rgba(255, 255, 255, 0.1);
+            --settings-bg-light: rgba(0, 0, 0, 0.7);
         }
 
         * {
@@ -119,20 +121,31 @@
             position: absolute;
             top: 50px;
             right: 10px;
-            background-color: #fff;
+            background-color: var(--settings-bg-dark); /* Dark background for dark theme */
             border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             z-index: 11;
+            transition: background-color 0.3s;
+        }
+
+        body.light-theme .settings-menu {
+            background-color: var(--settings-bg-light); /* Light background for light theme */
+            color: var(--text-light); /* Light text color */
         }
 
         .menu-option {
             padding: 10px 15px;
             cursor: pointer;
+            color: var(--text-dark); /* Adjust text color for dark theme */
+        }
+
+        body.light-theme .menu-option {
+            color: var(--text-light); /* Light text color for light theme */
         }
 
         .menu-option:hover {
-            background-color: var(--highlight-color);
-            color: #fff;
+            background-color: var(--highlight-color); /* Use your highlight color for hover */
+            color: #fff; /* Change text color to white on hover */
         }
 
         #markdown-content {
