@@ -58,6 +58,19 @@ function loadLayout() {
     }
 }
 
+// Save scroll position to localStorage
+function saveScrollPosition() {
+    localStorage.setItem('scroll-position', window.scrollY);
+}
+
+// Load the scroll position from localStorage
+function loadScrollPosition() {
+    const savedScrollPosition = localStorage.getItem('scroll-position');
+    if (savedScrollPosition) {
+        window.scrollTo(0, savedScrollPosition);
+    }
+}
+
 // Define stories and their categories
 const stories = {
     "Flash Fiction": [
@@ -199,10 +212,15 @@ function showStoryMenu() {
 // Initialize the page with user preferences
 window.addEventListener('hashchange', loadStoryFromHash);
 
+// Save the scroll position when the page is unloaded
+window.addEventListener('beforeunload', saveScrollPosition);
+
+// Restore scroll position when the page loads
 window.onload = function () {
     loadTheme();
     loadLayout(); // Load the layout preference
     loadFontSize(); // Load the saved font size
+    loadScrollPosition(); // Restore the scroll position
     loadStories();
     loadStoryFromHash(); // Check if there's a story in the hash
 };
