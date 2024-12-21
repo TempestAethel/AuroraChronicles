@@ -9,59 +9,55 @@
     <title>Story Hub</title>
     <style>
         :root {
-            --background-dark: #121212; /* Dark background */
-            --text-dark: #ffffff; /* Light text on dark background */
-            --background-light: #ffffff; /* Light background */
-            --text-light: #000000; /* Dark text on light background */
-            --highlight-color: #4e73df; /* Highlight color for text and buttons */
-            --button-hover-color: #375a7f; /* Hover color for buttons */
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+            --highlight-color: #4e73df;
+            --button-hover-color: #375a7f;
         }
 
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--background-dark); /* Set dark background */
-            color: var(--text-dark); /* Light text color */
+            background-color: var(--background-dark);
+            color: var(--text-dark);
             line-height: 1.6;
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
         }
 
         body.light-theme {
-            background-color: var(--background-light); /* Light theme background */
-            color: var(--text-light); /* Dark text on light background */
+            background-color: var(--background-light);
+            color: var(--text-light);
         }
 
-        /* Header Styling */
         header {
             text-align: center;
             margin-bottom: 30px;
         }
 
         h1 {
-            color: var(--highlight-color); /* Use highlight color for header */
+            color: var(--highlight-color);
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
         h2 {
             margin: 20px 0 10px;
-            color: var(--highlight-color); /* Use highlight color for sub-headers */
+            color: var(--highlight-color);
             font-size: 1.8rem;
             text-align: center;
         }
 
-        /* Buttons */
         .story-button {
             display: inline-block;
-            background: var(--highlight-color); /* Highlight color for buttons */
+            background: var(--highlight-color);
             color: #fff;
             text-decoration: none;
             padding: 10px 20px;
@@ -72,34 +68,32 @@
         }
 
         .story-button:hover {
-            background: var(--button-hover-color); /* Darker color on hover */
+            background: var(--button-hover-color);
         }
 
-        /* Sections */
         .story-section {
             margin-bottom: 40px;
         }
 
         .story-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: flex; /* Change to flex to align items in a row */
+            flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+            justify-content: center; /* Center align items */
+            gap: 10px; /* Space between buttons */
         }
 
-        /* Footer */
         footer {
             text-align: center;
             margin-top: 30px;
             color: #aaa;
         }
 
-        /* Toggle Button */
         .toggle-btn {
             position: fixed;
             top: 10px;
             right: 10px;
             padding: 10px 20px;
-            background-color: var(--highlight-color); /* Button background in highlight color */
+            background-color: var(--highlight-color);
             color: white;
             border: none;
             border-radius: 5px;
@@ -107,17 +101,15 @@
         }
 
         .toggle-btn:hover {
-            background-color: var(--button-hover-color); /* Button hover color */
+            background-color: var(--button-hover-color);
         }
     </style>
     
 <script>
-    // Function to set the theme to localStorage
     function saveThemePreference(isLightTheme) {
         localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
     }
 
-    // Function to load the theme from localStorage
     function loadTheme() {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
@@ -127,96 +119,76 @@
         }
     }
 
-    // Function to toggle the theme and save the preference
     function toggleTheme() {
         document.body.classList.toggle('light-theme');
         const isLightTheme = document.body.classList.contains('light-theme');
         saveThemePreference(isLightTheme);
     }
 
-    // Fetch list of short stories from GitHub
-    async function fetchShortStories() {
-        const shortStoriesContainer = document.getElementById('short-stories');
-        const shortStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Short%20Stories';
-        
-        try {
-            // Fetch the contents of the Short Stories folder
-            const response = await fetch(shortStoriesUrl);
-            const data = await response.json();
+    // Static data for stories categorized
+    const stories = {
+        "Flash Fiction": [
+            { name: "A Tale of Two Perspectives", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/A%20Tale%20of%20Two%20Perspectives.md" },
+            { name: "A Balanced Life", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/A%20Balanced%20Life.md" },
+            { name: "The Fault Lines", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Fault%20Lines.md" },
+            { name: "The Needs We Carry", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Needs%20We%20Carry.md" },
+            { name: "The Weight of Expectations", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Weight%20of%20Expectations.md" },
+            { name: "The Weight of Words", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Weight%20of%20Words.md" }
+        ],
+        "Short Stories": [
+            { name: "A Journey Through Gender Roles", url: "https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/A%20Journey%20Through%20Gender%20Roles.md" },
+            { name: "Unspoken Expectations", url: "https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/Unspoken%20Expectations.md" }
+        ],
+        "Novel": [
+            { name: "Fractured", url: "https://tempestaethel.github.io/AuroraChronicles/Novel/Fractured.md" }
+        ],
+        "Epic": [
+            { name: "The Crumbling Citadel", url: "https://tempestaethel.github.io/AuroraChronicles/Epic/The%20Crumbling%20Citadel.md" }
+        ]
+    };
 
-            // Filter out only .html files and create links for them
-            data.forEach(item => {
-                if (item.name.endsWith('.html')) {
-                    const storyLink = document.createElement('a');
-                    storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/${item.name}`;
-                    storyLink.classList.add('story-button');
-                    storyLink.textContent = item.name.replace('.html', ''); // Display the filename without .html extension
-                    shortStoriesContainer.appendChild(storyLink);
-                }
-            });
-        } catch (error) {
-            console.error('Error fetching short stories:', error);
-        }
-    }
+    function loadStories() {
+        const storySections = document.getElementById('story-sections');
 
-    async function fetchLongStories() {
-    const longStoriesContainer = document.getElementById('long-stories');
-    const longStoriesUrl = 'https://api.github.com/repos/TempestAethel/AuroraChronicles/contents/Long%20Stories/Markdowns';
+        Object.keys(stories).forEach(category => {
+            const section = document.createElement('div');
+            const header = document.createElement('h2');
+            header.textContent = category;
+            section.appendChild(header);
 
-    try {
-        // Fetch the contents of the Long Stories/Markdowns folder
-        const response = await fetch(longStoriesUrl);
-        const data = await response.json();
+            const container = document.createElement('div');
+            container.classList.add('story-container');
 
-        // Filter out only .md files (Markdown files) and create links for them
-        data.forEach((item) => {
-            if (item.name.endsWith('.md')) {  // We only care about Markdown files
+            stories[category].forEach(story => {
                 const storyLink = document.createElement('a');
-                // Creating link with the file name (without .md extension) as hash
-                const fileNameWithoutExtension = item.name.replace('.md', '');
-                storyLink.href = `https://tempestaethel.github.io/AuroraChronicles/Long%20Stories/#${fileNameWithoutExtension}`;
+                storyLink.href = story.url;
                 storyLink.classList.add('story-button');
-                storyLink.textContent = fileNameWithoutExtension; // Display the filename without .md extension
-                longStoriesContainer.appendChild(storyLink);
-            }
+                storyLink.textContent = story.name; // Displaying only the story name
+                container.appendChild(storyLink);
+            });
+
+            section.appendChild(container);
+            storySections.appendChild(section);
         });
-    } catch (error) {
-        console.error('Error fetching long stories:', error);
     }
-}
 
     window.onload = function () {
-        loadTheme();  // Load the saved theme on page load
-        fetchShortStories(); // Fetch and display short stories
-        fetchLongStories();  // Fetch and display long stories
+        loadTheme();
+        loadStories(); // Load static stories
     };
 </script>
-
-
 
 </head>
 <body>
     <header>
         <h1>Aurora Chronicles - Story Hub</h1>
-        <p>Your gateway to explore long and short stories.</p>
+        <p>Your gateway to explore various stories.</p>
         <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
-    <!-- Long Stories Section -->
-    <section class="story-section">
-        <h2>Long Stories</h2>
-        <div id="long-stories" class="story-container">
-            <!-- Dynamically loaded long story links -->
-        </div>
-    </section>
-
-    <!-- Short Stories Section -->
-    <section class="story-section">
-        <h2>Short Stories</h2>
-        <div id="short-stories" class="story-container">
-            <!-- Dynamically loaded short story links -->
-        </div>
-    </section>
+    <div id="story-sections">
+        <!-- Static story categories and links will be loaded here -->
+    </div>
 
     <footer>
         <p>&copy; 2024 Aurora Chronicles. All Rights Reserved.</p>
