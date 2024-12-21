@@ -8,83 +8,79 @@
     <title>Story Hub</title>
     <style>
         :root {
-            --background-dark: #121212; /* Dark background */
-            --text-dark: #ffffff; /* Light text on dark background */
-            --background-light: #ffffff; /* Light background */
-            --text-light: #000000; /* Dark text on light background */
-            --highlight-color: #4e73df; /* Highlight color for text and buttons */
-            --button-hover-color: #375a7f; /* Hover color for buttons */
-            --container-width: 800px; /* Maximum width for container */
+            --background-dark: #121212;
+            --text-dark: #ffffff;
+            --background-light: #ffffff;
+            --text-light: #000000;
+            --highlight-color: #4e73df;
+            --button-hover-color: #375a7f;
+            --container-width: 800px;
         }
 
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--background-dark); /* Set dark background */
-            color: var(--text-dark); /* Light text color */
+            background-color: var(--background-dark);
+            color: var(--text-dark);
             line-height: 1.6;
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center items horizontally */
-            justify-content: center; /* Center items vertically */
+            align-items: center;
+            justify-content: center;
         }
 
         body.light-theme {
-            background-color: var(--background-light); /* Light theme background */
-            color: var(--text-light); /* Dark text on light background */
+            background-color: var(--background-light);
+            color: var(--text-light);
         }
 
-        /* Header Styling */
         header {
             text-align: center;
             margin-bottom: 30px;
         }
 
         h1 {
-            color: var(--highlight-color); /* Use highlight color for header */
+            color: var(--highlight-color);
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
         h2 {
             margin: 20px 0 10px;
-            color: var(--highlight-color); /* Use highlight color for sub-headers */
+            color: var(--highlight-color);
             font-size: 1.8rem;
             text-align: center;
         }
 
-        /* Sections */
         .story-section {
             border: 2px solid var(--highlight-color);
             border-radius: 5px;
             padding: 20px;
-            margin: 20px 0; /* Add vertical margin */
-            width: 100%; /* Full width */
-            max-width: var(--container-width); /* Limit width */
-            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            margin: 20px 0;
+            width: 100%;
+            max-width: var(--container-width);
+            background-color: rgba(255, 255, 255, 0.1);
             display: flex;
-            flex-direction: column; /* Stack category headers vertically */
-            align-items: center; /* Center category header */
+            flex-direction: column;
+            align-items: center;
         }
 
         .story-buttons {
-            display: flex; /* Display buttons in a row */
-            flex-wrap: wrap; /* Allow wrapping to new lines if needed */
-            justify-content: center; /* Center buttons */
-            margin-top: 10px; /* Space above buttons */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
         }
 
         .story-button {
-            background: var(--highlight-color); /* Highlight color for buttons */
+            background: var(--highlight-color);
             color: #fff;
             text-decoration: none;
             padding: 10px 20px;
@@ -96,17 +92,15 @@
         }
 
         .story-button:hover {
-            background: var(--button-hover-color); /* Darker color on hover */
+            background: var(--button-hover-color);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             margin-top: 30px;
             color: #aaa;
         }
 
-        /* Toggle Button */
         .toggle-btn {
             position: fixed;
             top: 10px;
@@ -120,10 +114,9 @@
         }
 
         .toggle-btn:hover {
-            background-color: var(--button-hover-color); /* Button hover color */
+            background-color: var(--button-hover-color);
         }
 
-        /* Content Area */
         #markdown-content {
             width: 100%;
             max-width: var(--container-width);
@@ -131,7 +124,27 @@
             padding: 20px;
             border-radius: 5px;
             margin-top: 20px;
-            display: none; /* Hidden initially */
+            display: none;
+        }
+
+        .menu-button {
+            display: none;
+            background: var(--highlight-color);
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .story-section {
+                display: none; /* Hide sections on small screens */
+            }
+
+            .menu-button {
+                display: block; /* Show menu button */
+            }
         }
     </style>
     
@@ -159,22 +172,22 @@
 
         const stories = {
             "Flash Fiction": [
-                { name: "A Tale of Two Perspectives", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/A%20Tale%20of%20Two%20Perspectives.md" },
-                { name: "A Balanced Life", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/A%20Balanced%20Life.md" },
-                { name: "The Fault Lines", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Fault%20Lines.md" },
-                { name: "The Needs We Carry", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Needs%20We%20Carry.md" },
-                { name: "The Weight of Expectations", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Weight%20of%20Expectations.md" },
-                { name: "The Weight of Words", url: "https://tempestaethel.github.io/AuroraChronicles/Flash%20Fiction/The%20Weight%20of%20Words.md" }
+                { name: "A Tale of Two Perspectives", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Flash%20Fiction/A%20Tale%20of%20Two%20Perspectives.md" },
+                { name: "A Balanced Life", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Flash%20Fiction/A%20Balanced%20Life.md" },
+                { name: "The Fault Lines", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Flash%20Fiction/The%20Fault%20Lines.md" },
+                { name: "The Needs We Carry", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Flash%20Fiction/The%20Needs%20We%20Carry.md" },
+                { name: "The Weight of Expectations", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Flash%20Fiction/The%20Weight%20of%20Expectations.md" },
+                { name: "The Weight of Words", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Flash%20Fiction/The%20Weight%20of%20Words.md" }
             ],
             "Short Stories": [
-                { name: "A Journey Through Gender Roles", url: "https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/A%20Journey%20Through%20Gender%20Roles.md" },
-                { name: "Unspoken Expectations", url: "https://tempestaethel.github.io/AuroraChronicles/Short%20Stories/Unspoken%20Expectations.md" }
+                { name: "A Journey Through Gender Roles", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Short%20Stories/A%20Journey%20Through%20Gender%20Roles.md" },
+                { name: "Unspoken Expectations", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Short%20Stories/Unspoken%20Expectations.md" }
             ],
             "Novel": [
-                { name: "Fractured", url: "https://tempestaethel.github.io/AuroraChronicles/Novel/Fractured.md" }
+                { name: "Fractured", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Novel/Fractured.md" }
             ],
             "Epic": [
-                { name: "The Crumbling Citadel", url: "https://tempestaethel.github.io/AuroraChronicles/Epic/The%20Crumbling%20Citadel.md" }
+                { name: "The Crumbling Citadel", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Stories/Epic/The%20Crumbling%20Citadel.md" }
             ]
         };
 
@@ -210,6 +223,10 @@
         }
 
         function loadStory(url, title) {
+            // Update the URL to allow page refresh
+            window.history.pushState({title: title}, title, `?story=${encodeURIComponent(title)}`);
+
+            // Fetch and display the story content
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -221,13 +238,21 @@
                     const converter = new showdown.Converter();
                     const htmlContent = converter.makeHtml(markdown);
                     document.getElementById('markdown-content').innerHTML = htmlContent;
-                    document.getElementById('markdown-content').style.display = 'block'; // Show content
+                    document.getElementById('markdown-content').style.display = 'block';
                     document.title = `${title} - Aurora Chronicles`;
+
+                    // Hide story sections
+                    document.getElementById('story-sections').style.display = 'none';
                 })
                 .catch(error => {
                     document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
                     console.error('Error loading story content:', error);
                 });
+        }
+
+        function showMenu() {
+            // Refresh the page to reset
+            location.reload();
         }
 
         window.onload = function () {
@@ -240,16 +265,13 @@
     <header>
         <h1>Aurora Chronicles - Story Hub</h1>
         <p>Your gateway to explore long and short stories.</p>
-        <button class="toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">Toggle Theme</button>
+        <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
-    <div id="story-sections">
-        <!-- Static story categories and links will be loaded here -->
-    </div>
-
-    <div id="markdown-content">
-        <!-- Story content will be displayed here -->
-    </div>
+    <button class="menu-button" onclick="showMenu()">Show Stories</button>
+    
+    <div id="story-sections"></div>
+    <div id="markdown-content"></div>
 
     <footer>
         <p>&copy; 2024 Aurora Chronicles. All Rights Reserved.</p>
