@@ -17,7 +17,7 @@
             --container-width: 90vw; /* 90% of viewport width */
             --settings-bg-dark: rgba(255, 255, 255, 0.1);
             --settings-bg-light: rgba(0, 0, 0, 0.7);
-            --font-size: 16px;
+            --font-size: 16px; /* Default font size */
             --font-family: Arial, sans-serif; /* Default font */
         }
 
@@ -196,6 +196,11 @@
             padding: 10px 15px;
             cursor: pointer;
         }
+
+        .font-size-option.selected {
+            background-color: var(--highlight-color);
+            color: #fff;
+        }
     </style>
     
     <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
@@ -222,6 +227,13 @@
 
         function changeFont(font) {
             document.documentElement.style.setProperty('--font-family', font);
+        }
+
+        function changeFontSize(size) {
+            document.documentElement.style.setProperty('--font-size', size + 'px');
+            const options = document.querySelectorAll('.font-size-option');
+            options.forEach(option => option.classList.remove('selected'));
+            document.querySelector(`.font-size-option[data-size="${size}"]`).classList.add('selected');
         }
 
         const stories = {
@@ -310,9 +322,12 @@
         function toggleMenuOption(option) {
             if (option === 'toggleTheme') {
                 toggleTheme();
-            } else if (option.startsWith('font')) {
+            } else if (option.startsWith('font-')) {
                 const font = option.split('-')[1];
                 changeFont(font);
+            } else if (option.startsWith('size-')) {
+                const size = option.split('-')[1];
+                changeFontSize(size);
             } else if (option === 'showMenu') {
                 showStoryMenu();
             }
@@ -338,6 +353,7 @@
 
     <button class="settings-btn" onclick="showMenu()">Settings</button>
     <div id="settings-menu" class="settings-menu">
+        <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
         <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
         <div class="menu-option">Select Font:</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Arial')">Arial</div>
@@ -345,7 +361,13 @@
         <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Tahoma')">Tahoma</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Verdana')">Verdana</div>
         <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Comic Sans MS')">Comic Sans MS</div>
-        <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
+        <div class="menu-option">Select Font Size:</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-14')">14px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-16')">16px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-18')">18px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-20')">20px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-22')">22px</div>
+        
     </div>
     
     <div id="story-sections"></div>
