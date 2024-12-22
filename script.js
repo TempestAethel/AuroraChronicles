@@ -58,37 +58,6 @@ function loadLayout() {
     }
 }
 
-// Store scroll position for each story
-let scrollTimeout;
-
-function saveScrollPosition() {
-    const currentStoryName = window.location.hash.split('=')[1]; // Get story name from URL hash
-    if (currentStoryName) {
-        const scrollPosition = window.scrollY;
-        localStorage.setItem(`scroll-position-${currentStoryName}`, scrollPosition);
-    }
-}
-
-// Load scroll position for a specific story
-function loadScrollPosition() {
-    const currentStoryName = window.location.hash.split('=')[1]; // Get story name from URL hash
-    if (currentStoryName) {
-        const savedScrollPosition = localStorage.getItem(`scroll-position-${currentStoryName}`);
-        if (savedScrollPosition) {
-            window.scrollTo(0, savedScrollPosition);
-        }
-    }
-}
-
-// Debounced scroll event to update the scroll position after scrolling stops
-function handleScrollEnd() {
-    clearTimeout(scrollTimeout);  // Clear previous timeout if any
-    scrollTimeout = setTimeout(saveScrollPosition, 500);  // Save scroll position after 500ms
-}
-
-// Attach event listener to handle scroll end
-window.addEventListener('scroll', handleScrollEnd);
-
 // Define stories and their categories
 const stories = {
     "Flash Fiction": [
@@ -230,15 +199,11 @@ function showStoryMenu() {
 // Initialize the page with user preferences
 window.addEventListener('hashchange', loadStoryFromHash);
 
-// Save the scroll position when the page is unloaded
-window.addEventListener('beforeunload', saveScrollPosition);
-
-// Restore scroll position when the page loads
+// Initialize the page on load
 window.onload = function () {
     loadTheme();
     loadLayout(); // Load the layout preference
     loadFontSize(); // Load the saved font size
-    loadScrollPosition(); // Restore the scroll position for the current story
     loadStories();
     loadStoryFromHash(); // Check if there's a story in the hash
 };
