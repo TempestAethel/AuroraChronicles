@@ -1,7 +1,9 @@
 # **Fractured**  
 **Author:** AuroraHeart  
-
+ 
 ---
+
+### **Act I: The Shattering** 
 
 ## **Chapter 1: The Experiment (Part 1)**  
 
@@ -149,10 +151,10 @@ And whatever was in the device… wasn’t gone.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
+
+
 
 ## **Chapter 2: Fractured Perception (Part 1)**  
 
@@ -352,10 +354,10 @@ And somewhere, just beneath the surface, a voice whispered:
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
+
+
 
 ## **Chapter 3: Marcus Returns (Part 1)**  
 
@@ -448,6 +450,7 @@ Elise didn’t respond.
 Avery reached for the device, their hand trembling slightly. Whatever Marcus was playing at, they needed answers—and this felt like the only place to start.  
 
 ---
+
 ## **Chapter 3: Marcus Returns (Part 2)**  
 
 Avery’s hands hovered over the black device Marcus had left behind. It looked innocuous—just another piece of tech. But it pulsed with the weight of the warning Marcus had delivered. *Memory replication. Manipulation. Full-scale mind control.* Words that sounded impossible, but after what had happened with the MERI Device, Avery wasn’t so sure anymore.
@@ -546,10 +549,7 @@ And it was watching.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Chapter 4: The First Loop (Part 1)**  
 
@@ -650,6 +650,7 @@ But Avery knew the truth.
 Wherever “here” was—whatever trap they had fallen into—there was no turning back now.  
 
 ---
+
 
 ## **Chapter 4: The First Loop (Part 2)**  
 
@@ -771,10 +772,8 @@ The elevator shuddered violently, and the lights blinked out.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
 
 ## **Chapter 5: Escape and Illusion (Part 1)**  
 
@@ -919,6 +918,7 @@ It was closer this time.
 And it was waiting.  
 
 ---
+
 ## **Chapter 5: Escape and Illusion (Part 2)**  
 
 Avery couldn’t breathe.  
@@ -1061,10 +1061,8 @@ A whisper crawled out of the shadows, soft and sickly familiar.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+### **Act II: The Unraveling** 
 
 ## **Chapter 6: Ghosts of the Mind (Part 1)**  
 
@@ -1364,10 +1362,8 @@ Avery pressed their hands to their ears, screaming.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
 
 ## **Chapter 7: Cracks in the Mirror (Part 1)**  
 
@@ -1681,11 +1677,8 @@ Darkness.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
-
+ 
 ## **Chapter 8: The Threshold (Part 1)**  
 
 Avery’s eyes snapped open.  
@@ -1968,10 +1961,7 @@ And everything went dark.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Chapter 9: The Descent (Part 1)**  
 
@@ -2150,6 +2140,7 @@ Elise’s expression was gentle, almost maternal. “You face it. You let it hur
 Avery’s heart pounded as they took a shaky breath, the memory of their daughter’s laughter ringing faintly in their ears. For the first time, they didn’t try to push it away.  
 
 ---
+
 ## **Chapter 9: The Descent (Part 2)**  
 
 The weight of Elise’s words hung heavy in the air.  
@@ -2274,10 +2265,8 @@ With one final glance at the empty lab, they stepped through it, into the light 
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+
 
 ## **Chapter 10: Fragments Rebuilt (Part 1)**  
 
@@ -2372,6 +2361,7 @@ Avery kept walking, one step at a time, the echoes of laughter and pain trailing
 For once, Avery didn’t turn back.  
 
 ---
+
 ## **Chapter 10: Fragments Rebuilt (Part 2)**  
 
 Avery walked for what felt like hours. The path beneath their feet seemed endless, stretching into the golden haze like a ribbon that tied them to some unseen destination. At first, every step felt weighted—hesitant and unsure—as if they were afraid the ground would dissolve into another illusion.  
@@ -2465,7 +2455,6 @@ And Avery walked on, leaving the fractures behind.
 ---
 
 ## **Act 3: Reconstruction**  
----
 
 ## **Chapter 11: A New Horizon (Part 1)**  
 
@@ -2727,10 +2716,8 @@ The path stretched forward again, waiting.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+
 
 ## **Chapter 12: Through the Shadows (Part 1)**  
 
@@ -2964,10 +2951,9 @@ With that, they turned toward the sound of the machines and started walking—ea
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
+
 
 ## **Chapter 13: A World of Illusions (Part 1)**  
 
@@ -3098,6 +3084,7 @@ Because this time, the screen already had a message waiting for them:
 **Welcome back, Avery.**  
 
 ---
+
 ## **Chapter 13: A World of Illusions (Part 2)**  
 
 The words on the screen—**Welcome back, Avery**—seemed to pulse, as though alive. Avery’s chest tightened, their breath caught in their throat. It was waiting for them. *Watching.*  
@@ -3248,10 +3235,8 @@ The other Avery smiled faintly, their black eyes glinting like mirrors.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+
 
 ## **Chapter 14: Fractured Truths (Part 1)**  
 
@@ -3352,6 +3337,7 @@ They weren’t ready.
 But they knew they didn’t have a choice.  
 
 ---  
+
 ## **Chapter 14: Fractured Truths (Part 2)**  
 
 The words on the screen—**Are you ready to remember?**—blinked slowly, as if taunting Avery with the question. Their hands trembled as they gripped the edge of the table, the weight of it pressing down like an invisible force.  
@@ -3500,10 +3486,7 @@ And this time, Avery stepped inside.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Chapter 15: The Puppet Strings (Part 1)**  
 
@@ -3777,10 +3760,7 @@ The darkness closed in.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
-
----
+### **Act IV: The Collapse** 
 
 ## **Chapter 16: Erasing the Self (Part 1)**  
 
@@ -3923,6 +3903,7 @@ The screen blinked once, then twice, before the hum of the device began to rise.
 For the first time in what felt like forever, Avery let go.  
 
 ---  
+
 ## **Chapter 16: Erasing the Self (Part 2)**  
 
 The hum of the device grew louder, vibrating through the walls, through Avery’s bones, through the very fabric of their mind. The console screen flashed its single command:  
@@ -4075,11 +4056,8 @@ They let go.
 
 ---  
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
-
+ 
 ## **Chapter 17: Simulated Lives (Part 1)**  
 
 Avery gasped as they opened their eyes, their body jolting upright as though surfacing from a deep, suffocating ocean. Their lungs burned with the first breath, the world around them blinding in its clarity.  
@@ -4353,10 +4331,7 @@ And from the darkness, the voice came again.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Chapter 18: The Ghost in the Machine (Part 1)**  
 
@@ -4589,10 +4564,9 @@ And somewhere, faintly, a voice echoed in their mind—
 
 ---
 
-  # **Fractured**  
-**Author:** AuroraHeart  
+  
+ 
 
----
 
 ## **Chapter 19: The Loop Tightens (Part 1)**  
 
@@ -4850,10 +4824,7 @@ And for the first time, they walked forward.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Chapter 20: Breaking Point (Part 1)**  
 
@@ -5120,10 +5091,8 @@ This time, they weren’t afraid.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+### **Act V: The Fractured Truth** 
 
 ## **Chapter 21: The Final Confrontation (Part 1)**  
 
@@ -5358,10 +5327,7 @@ Together, they began to walk toward the light.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Chapter 22: The Ultimate Betrayal (Part 1)**  
 
@@ -5556,10 +5522,8 @@ And then they made their decision.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+
 
 ## **Chapter 23: The Truth Unveiled (Part 1)**  
 
@@ -5818,10 +5782,9 @@ And they made their choice.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
+
 
 ## **Chapter 24: A Fragile Escape (Part 1)**  
 
@@ -6060,10 +6023,6 @@ Avery walked on, alone.
 ---
 
 
-# **Fractured**  
-**Author:** AuroraHeart  
-
----
 
 ## **Chapter 25: Fractured Reality (Part 1)**  
 
@@ -6175,10 +6134,8 @@ And they were still trapped inside it.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+
 
 ## **Chapter 25: Fractured Reality (Part 2)**  
 
@@ -6285,10 +6242,8 @@ And this time, they didn’t answer.
 ---
 
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
+ 
 
 ## **Epilogue: Fractured Reality (Part 1)**  
 
@@ -6378,10 +6333,7 @@ They never would.
 
 ---
 
-# **Fractured**  
-**Author:** AuroraHeart  
 
----
 
 ## **Epilogue: Fractured Reality (Part 2)**  
 
