@@ -231,6 +231,17 @@ p {
     color: #fff;
 }
 
+ul {
+    padding-left: 20px;  /* Adjust padding to align with the text */
+    margin: 0;  /* Remove default margin */
+}
+
+li {
+    list-style-position: inside;  /* Ensure the bullet stays inside the container */
+    margin-bottom: 8px;  /* Adjust margin between list items if necessary */
+}
+
+
 /* Enhance dropdowns */
 .markdown-content select {
     appearance: none;
