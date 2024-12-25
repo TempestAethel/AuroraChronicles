@@ -18,10 +18,10 @@ The stories featured in this collection can be found on the [Aurora Chronicles](
 
 - **Flash Fiction**: Extremely short stories, usually under 1,000 words, focusing on a single moment or idea.
 - **Short Stories**: Typically range from 1,000 to 7,500 words, developing plots, characters, and themes more fully than flash fiction.
-- **Novelette**: Longer than a short story but shorter than a novella, usually between 7,500 and 20,000 words, often exploring more complex plots and character development.
-- **Novella**: Generally between 20,000 and 40,000 words, offering a more in-depth narrative than short stories while being more concise than full-length novels.
-- **Novel**: Standard length is typically 40,000 words or more, providing extensive character development and complex plots, often exploring multiple themes and subplots.
-- **Epic or Saga**: These can exceed 100,000 words and may span generations or large timelines, involving intricate plots and numerous characters.
+
+## *Update Notice*
+
+As of today, I will be updating **only the short stories** section here. You can expect new short stories to be posted here regularly, while other story formats will be posted in version 2.
 
 ## *License*
 
