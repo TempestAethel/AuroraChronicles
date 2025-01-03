@@ -60,22 +60,22 @@ function loadLayout() {
 
 const stories = {
     "Flash Fiction": [
-        { name: "A Tale of Two Perspectives", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Flash%20Fiction/A%20Tale%20of%20Two%20Perspectives.md" },
-        { name: "A Balanced Life", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Flash%20Fiction/A%20Balanced%20Life.md" },
-        { name: "The Fault Lines", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Flash%20Fiction/The%20Fault%20Lines.md" },
-        { name: "The Needs We Carry", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Flash%20Fiction/The%20Needs%20We%20Carry.md" },
-        { name: "The Weight of Expectations", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Flash%20Fiction/The%20Weight%20of%20Expectations.md" },
-        { name: "The Weight of Words", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Flash%20Fiction/The%20Weight%20of%20Words.md" }
+        { name: "A Tale of Two Perspectives", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/A%20Tale%20of%20Two%20Perspectives.md" },
+        { name: "A Balanced Life", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/A%20Balanced%20Life.md" },
+        { name: "The Fault Lines", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/The%20Fault%20Lines.md" },
+        { name: "The Needs We Carry", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/The%20Needs%20We%20Carry.md" },
+        { name: "The Weight of Expectations", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/The%20Weight%20of%20Expectations.md" },
+        { name: "The Weight of Words", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/The%20Weight%20of%20Words.md" }
     ],
     "Short Stories": [
-        { name: "A Journey Through Gender Roles", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Short%20Stories/A%20Journey%20Through%20Gender%20Roles.md" },
-        { name: "Unspoken Expectations", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Short%20Stories/Unspoken%20Expectations.md" }
+        { name: "A Journey Through Gender Roles", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Short%20Stories/A%20Journey%20Through%20Gender%20Roles.md" },
+        { name: "Unspoken Expectations", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Short%20Stories/Unspoken%20Expectations.md" }
     ],
     "Novel": [
-        { name: "Fractured", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Novel/Fractured.md" }
+        { name: "Fractured", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Novel/Fractured.md" }
     ],
     "Epic": [
-        { name: "The Crumbling Citadel", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/Chronicle%201/Stories/Epic/The%20Crumbling%20Citadel.md" }
+        { name: "The Crumbling Citadel", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Epic/The%20Crumbling%20Citadel.md" }
     ]
 };
 
