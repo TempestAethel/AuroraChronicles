@@ -14,12 +14,6 @@ Welcome to the *AuroraChronicles* repository! This is a collection of stories wr
 
 The stories featured in this collection can be found on the [Aurora Chronicles](https://tempestaethel.github.io/AuroraChronicles/). Each story explores unique perspectives and emotional journeys. Check out the full list and dive into the captivating narratives!
 
-## *Update Notice* (As of FEB 08, 2025, 11:30 AM)
-
-I am archiving the repository at this time, as I want to focus on other things for a while. I will unarchive and update the collection again once I regain the interest to work on it. Thank you for understanding!
-
-As of now, Chronicle 1 is complete. Chronicle 2 includes 4 mostly unfinished stories.
-
 ## *Types of Stories*
 
 - **Flash Fiction**: Extremely short stories, usually under 1,000 words, focusing on a single moment or idea.
@@ -29,9 +23,11 @@ As of now, Chronicle 1 is complete. Chronicle 2 includes 4 mostly unfinished sto
 - **Novel**: Standard length is typically 40,000 words or more, providing extensive character development and complex plots, often exploring multiple themes and subplots.
 - **Epic or Saga**: These can exceed 100,000 words and may span generations or large timelines, involving intricate plots and numerous characters.
 
-## *Update Notice*
+## *Update Notice* (As of FEB 08, 2025, 11:35 AM)
 
-As of today, I will be updating **only the short stories** section here. You can expect new short stories to be posted here regularly, while other story formats will be posted in version 2.
+I am archiving the repository at this time, as I want to focus on other things for a while. I will unarchive and update the collection again once I regain the interest to work on it. Thank you for understanding!
+
+As of now, Chronicle 1 is complete. Chronicle 2 includes 4 mostly unfinished stories.
 
 ## *License*
 
