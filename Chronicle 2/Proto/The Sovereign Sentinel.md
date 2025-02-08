@@ -1723,3 +1723,4 @@ An idea began to form.
 The battle was far from over, but Kael wasn’t done fighting yet.  
 
 
+## -- **<-- **To Be Continued** -->** --
