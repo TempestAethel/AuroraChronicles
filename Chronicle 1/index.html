@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
+    <title>Story Hub</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
+    <script src="script.js" defer></script>
+
+</head>
+    
+<body>
+    <header>
+        <h1>Aurora Chronicles - Story Hub</h1>
+        <p>Your gateway to explore long and short stories.</p>
+    </header>
+
+    <button class="settings-btn" onclick="showMenu()">Settings</button>
+    <div id="settings-menu" class="settings-menu">
+        <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
+        <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
+        <div class="menu-option" onclick="toggleMenuOption('toggleLayout')">Toggle Layout</div>
+        <div class="menu-option">Select Font:</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Arial')">Arial</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Georgia')">Georgia</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Tahoma')">Tahoma</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Verdana')">Verdana</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Comic Sans MS')">Comic Sans MS</div>
+        <div class="menu-option">Select Font Size:</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-14')">14px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-16')">16px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-18')">18px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-20')">20px</div>
+        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-22')">22px</div>
+    </div>
+    
+    <div id="story-sections"></div>
+    <div id="markdown-content"></div>
+
+    <footer>
+        <p>&copy; 2024 Aurora Chronicles. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
