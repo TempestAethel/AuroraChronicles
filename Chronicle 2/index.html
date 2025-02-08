@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +23,7 @@
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
+            margin-bottom: 20px;
         }
 
         .story-button {
@@ -39,13 +40,33 @@
             background-color: #45a049;
         }
 
+        /* Markdown content div */
         #markdown-content {
             margin-top: 20px;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f9f9f9;
-            display: none;
+            display: none; /* Hidden initially */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1em;
+        }
+
+        /* Fallback message styles */
+        #fallback-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
 
         /* Light theme styles */
@@ -59,6 +80,12 @@
             border-color: #ddd;
         }
 
+        .light-theme #fallback-message {
+            background-color: #f4f4f4;
+            color: #333;
+            border-color: #ddd;
+        }
+
         /* Dark theme styles */
         .dark-theme {
             background-color: #121212;
@@ -67,6 +94,13 @@
 
         .dark-theme #markdown-content {
             background-color: #2c2c2c;
+            border-color: #444;
+            color: #eaeaea;
+        }
+
+        .dark-theme #fallback-message {
+            background-color: #333;
+            color: #eaeaea;
             border-color: #444;
         }
 
@@ -85,13 +119,6 @@
             background-color: #333;
             border-left: 5px solid #4CAF50;
             color: #eaeaea;
-        }
-
-        /* Light Theme Blockquote */
-        .light-theme blockquote {
-            background-color: #f4f4f4;
-            border-left: 5px solid #4CAF50;
-            color: #333;
         }
 
         /* Toggle button styles */
@@ -121,6 +148,9 @@
     </div>
 
     <div id="markdown-content"></div>
+    <div id="fallback-message">
+        These stories are not fully written because I haven’t had enough time to focus on writing. I’ve been dedicating most of my time to other activities and hobbies, but I might return to them at a later time and date.
+    </div>
 
     <button id="theme-toggle">Toggle Theme</button>
 
@@ -137,7 +167,7 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                if (Array.isArray(data)) {
+                if (Array.isArray(data) && data.length > 0) {
                     // Filter out non-Markdown files (optional)
                     const markdownFiles = data.filter(file => file.name.endsWith('.md'));
 
@@ -150,11 +180,16 @@
                         button.addEventListener('click', () => loadStory(file.download_url)); // Download URL to fetch content
                         storyButtonsContainer.appendChild(button);
                     });
+                } else {
+                    // Show fallback message if no stories are available
+                    document.getElementById('fallback-message').style.display = 'block';
                 }
             })
             .catch(error => {
                 console.error("Error fetching file list:", error);
                 alert("Error loading the list of stories.");
+                // Show fallback message if there's an error fetching data
+                document.getElementById('fallback-message').style.display = 'block';
             });
 
         // Function to fetch and render the selected story
