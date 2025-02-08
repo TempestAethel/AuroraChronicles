@@ -1,4 +1,5 @@
-> Very Similar idea to that of **The Silent Witness** and **The Sovereign Sentinel**
+> Very Similar idea to that of **The Silent Witness** and **The Sovereign Sentinel** 
+> This is just an outline of the story with no chapters written.
 
 # The Silent Catalyst
 
