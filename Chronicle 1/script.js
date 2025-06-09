@@ -423,13 +423,8 @@ async function loadStory(story) {
         // Update page title
         document.title = `Aurora Chronicles - Story Hub | ${story.name}`;
         
-        // Show back button and hide story list if in mobile view
+        // Show back button
         backButton.style.display = 'block';
-        
-        // Hide story list on mobile
-        if (window.innerWidth <= 968) {
-            storyListContainer.style.display = 'none';
-        }
         
         // Hide loading indicator
         hideLoading();
@@ -462,9 +457,6 @@ function showStoryList() {
     
     // Hide back button
     backButton.style.display = 'none';
-    
-    // Show story list
-    storyListContainer.style.display = 'block';
     
     // Reset current story
     currentStory = null;
@@ -517,25 +509,6 @@ function showError(message) {
         </div>
     `;
 }
-
-// Utility functions for responsive behavior
-function handleResize() {
-    // Show/hide story list based on screen size and current state
-    if (window.innerWidth > 968) {
-        // Desktop view - always show story list if enabled
-        if (showStoryMenuCheckbox.checked) {
-            storyListContainer.style.display = 'block';
-        }
-    } else {
-        // Mobile view - hide story list when reading a story
-        if (currentStory) {
-            storyListContainer.style.display = 'none';
-        }
-    }
-}
-
-// Add resize listener
-window.addEventListener('resize', handleResize);
 
 // Add CSS animations for notifications
 const style = document.createElement('style');
