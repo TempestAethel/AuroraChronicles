@@ -27,8 +27,10 @@ let currentStory = null;
 let converter = null;
 
 // DOM elements
+const themeHub = document.getElementById('theme-hub');
 const settingsToggle = document.getElementById('settings-toggle');
 const settingsMenu = document.getElementById('settings-menu');
+const closeSettingsBtn = document.getElementById('close-settings');
 const storyListContainer = document.getElementById('story-list-container');
 const contentContainer = document.getElementById('content-container');
 const storyContent = document.getElementById('story-content');
@@ -41,6 +43,8 @@ const themeSelect = document.getElementById('theme-select');
 const layoutSelect = document.getElementById('layout-select');
 const fontFamilySelect = document.getElementById('font-family-select');
 const fontSizeSelect = document.getElementById('font-size-select');
+const resetPreferencesBtn = document.getElementById('reset-preferences');
+const skipThemeBtn = document.getElementById('skip-theme-selection');
 
 // Default preferences
 const defaultPreferences = {
@@ -48,7 +52,8 @@ const defaultPreferences = {
     layout: 'fixed',
     fontFamily: 'Arial, sans-serif',
     fontSize: '16',
-    showStoryMenu: true
+    showStoryMenu: true,
+    hasSelectedTheme: false
 };
 
 // Initialize the application
@@ -72,6 +77,16 @@ function init() {
     // Load preferences
     loadPreferences();
     
+    // Check if user has selected a theme before
+    const savedPreferences = localStorage.getItem('aurora-chronicles-preferences');
+    const preferences = savedPreferences ? JSON.parse(savedPreferences) : defaultPreferences;
+    
+    if (!preferences.hasSelectedTheme) {
+        showThemeHub();
+    } else {
+        hideThemeHub();
+    }
+    
     // Render story categories
     renderStoryCategories();
     
@@ -82,6 +97,18 @@ function init() {
     handleHashChange();
     
     console.log('Aurora Chronicles - Story Hub initialized');
+}
+
+// Show theme selection hub
+function showThemeHub() {
+    themeHub.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Hide theme selection hub
+function hideThemeHub() {
+    themeHub.classList.add('hidden');
+    document.body.style.overflow = '';
 }
 
 // Load user preferences from localStorage
@@ -113,10 +140,34 @@ function savePreferences() {
         layout: layoutSelect.value,
         fontFamily: fontFamilySelect.value,
         fontSize: fontSizeSelect.value,
-        showStoryMenu: showStoryMenuCheckbox.checked
+        showStoryMenu: showStoryMenuCheckbox.checked,
+        hasSelectedTheme: true
     };
     
     localStorage.setItem('aurora-chronicles-preferences', JSON.stringify(preferences));
+}
+
+// Reset preferences to defaults
+function resetPreferences() {
+    // Reset UI elements
+    themeSelect.value = defaultPreferences.theme;
+    layoutSelect.value = defaultPreferences.layout;
+    fontFamilySelect.value = defaultPreferences.fontFamily;
+    fontSizeSelect.value = defaultPreferences.fontSize;
+    showStoryMenuCheckbox.checked = defaultPreferences.showStoryMenu;
+    
+    // Apply default preferences
+    applyTheme(defaultPreferences.theme);
+    applyLayout(defaultPreferences.layout);
+    applyFontFamily(defaultPreferences.fontFamily);
+    applyFontSize(defaultPreferences.fontSize);
+    applyStoryMenuVisibility(defaultPreferences.showStoryMenu);
+    
+    // Save to localStorage
+    savePreferences();
+    
+    // Show confirmation
+    showNotification('Settings reset to defaults');
 }
 
 // Apply theme
@@ -148,10 +199,54 @@ function applyStoryMenuVisibility(show) {
     }
 }
 
+// Show notification
+function showNotification(message) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--accent-primary);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow-hover);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
 // Set up event listeners
 function setupEventListeners() {
+    // Theme hub events
+    const themeCards = document.querySelectorAll('.theme-card');
+    themeCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const theme = card.getAttribute('data-theme');
+            selectTheme(theme);
+        });
+    });
+    
+    skipThemeBtn.addEventListener('click', () => {
+        selectTheme('light');
+    });
+    
     // Settings toggle
     settingsToggle.addEventListener('click', toggleSettingsMenu);
+    closeSettingsBtn.addEventListener('click', hideSettingsMenu);
     
     // Close settings menu when clicking outside
     document.addEventListener('click', (e) => {
@@ -186,6 +281,9 @@ function setupEventListeners() {
         savePreferences();
     });
     
+    // Reset preferences button
+    resetPreferencesBtn.addEventListener('click', resetPreferences);
+    
     // Back button
     backButton.addEventListener('click', showStoryList);
     
@@ -196,6 +294,30 @@ function setupEventListeners() {
     document.addEventListener('keydown', handleKeyboardShortcuts);
 }
 
+// Select theme from hub
+function selectTheme(theme) {
+    // Update theme cards visual state
+    const themeCards = document.querySelectorAll('.theme-card');
+    themeCards.forEach(card => {
+        card.classList.remove('selected');
+        if (card.getAttribute('data-theme') === theme) {
+            card.classList.add('selected');
+        }
+    });
+    
+    // Apply theme immediately
+    applyTheme(theme);
+    themeSelect.value = theme;
+    
+    // Save preferences
+    savePreferences();
+    
+    // Hide theme hub after a short delay
+    setTimeout(() => {
+        hideThemeHub();
+    }, 500);
+}
+
 // Handle keyboard shortcuts
 function handleKeyboardShortcuts(e) {
     // Escape key to close settings or show story list
@@ -204,6 +326,8 @@ function handleKeyboardShortcuts(e) {
             hideSettingsMenu();
         } else if (currentStory) {
             showStoryList();
+        } else if (!themeHub.classList.contains('hidden')) {
+            selectTheme('light');
         }
     }
     
@@ -412,6 +536,33 @@ function handleResize() {
 
 // Add resize listener
 window.addEventListener('resize', handleResize);
+
+// Add CSS animations for notifications
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 
 // Initialize the application when DOM is loaded
 if (document.readyState === 'loading') {
