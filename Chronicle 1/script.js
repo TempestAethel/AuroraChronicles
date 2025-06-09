@@ -1,63 +1,6 @@
-// Save the theme preference in localStorage
-function saveThemePreference(isLightTheme) {
-    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
-}
+// Aurora Chronicles - Story Hub Application
 
-// Load the theme from localStorage
-function loadTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-    } else {
-        document.body.classList.remove('light-theme');
-    }
-}
-
-// Toggle between light and dark themes
-function toggleTheme() {
-    document.body.classList.toggle('light-theme');
-    const isLightTheme = document.body.classList.contains('light-theme');
-    saveThemePreference(isLightTheme);
-}
-
-// Change the font family dynamically
-function changeFont(font) {
-    document.documentElement.style.setProperty('--font-family', font);
-}
-
-// Save and change the font size dynamically
-function changeFontSize(size) {
-    document.documentElement.style.setProperty('--font-size', size + 'px');
-    const options = document.querySelectorAll('.font-size-option');
-    options.forEach(option => option.classList.remove('selected'));
-    document.querySelector(`.font-size-option[data-size="${size}"]`).classList.add('selected');
-    localStorage.setItem('font-size', size); // Save font size to localStorage
-}
-
-// Load the font size from localStorage
-function loadFontSize() {
-    const savedFontSize = localStorage.getItem('font-size');
-    if (savedFontSize) {
-        changeFontSize(savedFontSize);
-    }
-}
-
-// Toggle between full-width and fixed-width layout
-function toggleLayout() {
-    const isFullWidth = document.body.classList.toggle('full-width');
-    localStorage.setItem('layout', isFullWidth ? 'full' : 'fixed');
-}
-
-// Load the layout preference from localStorage
-function loadLayout() {
-    const savedLayout = localStorage.getItem('layout');
-    if (savedLayout === 'full') {
-        document.body.classList.add('full-width');
-    } else {
-        document.body.classList.remove('full-width');
-    }
-}
-
+// Story data as specified
 const stories = {
     "Flash Fiction": [
         { name: "A Tale of Two Perspectives", url: "https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/refs/heads/main/Chronicle%201/Stories/Flash%20Fiction/A%20Tale%20of%20Two%20Perspectives.md" },
@@ -79,132 +22,403 @@ const stories = {
     ]
 };
 
+// Application state
+let currentStory = null;
+let converter = null;
 
+// DOM elements
+const settingsToggle = document.getElementById('settings-toggle');
+const settingsMenu = document.getElementById('settings-menu');
+const storyListContainer = document.getElementById('story-list-container');
+const contentContainer = document.getElementById('content-container');
+const storyContent = document.getElementById('story-content');
+const backButton = document.getElementById('back-to-stories');
+const loadingIndicator = document.getElementById('loading-indicator');
 
-// Load the story sections dynamically
-function loadStories() {
-    const storySections = document.getElementById('story-sections');
+// Settings elements
+const showStoryMenuCheckbox = document.getElementById('show-story-menu');
+const themeSelect = document.getElementById('theme-select');
+const layoutSelect = document.getElementById('layout-select');
+const fontFamilySelect = document.getElementById('font-family-select');
+const fontSizeSelect = document.getElementById('font-size-select');
 
-    Object.keys(stories).forEach(category => {
-        const section = document.createElement('div');
-        section.classList.add('story-section');
+// Default preferences
+const defaultPreferences = {
+    theme: 'light',
+    layout: 'fixed',
+    fontFamily: 'Arial, sans-serif',
+    fontSize: '16',
+    showStoryMenu: true
+};
 
-        const header = document.createElement('h2');
-        header.textContent = category;
-        section.appendChild(header);
-
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.classList.add('story-buttons');
-
-        stories[category].forEach(story => {
-            const storyButton = document.createElement('a');
-            storyButton.href = '#';  // Keep the default link behavior
-            storyButton.classList.add('story-button');
-            storyButton.textContent = story.name;
-            storyButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                loadStory(story.url, story.name);
-            });
-            buttonsContainer.appendChild(storyButton);
+// Initialize the application
+function init() {
+    // Initialize Showdown converter
+    if (typeof showdown !== 'undefined') {
+        converter = new showdown.Converter({
+            headerLevelStart: 1,
+            simplifiedAutoLink: true,
+            excludeTrailingPunctuationFromURLs: true,
+            strikethrough: true,
+            tables: true,
+            ghCodeBlocks: true,
+            smoothLivePreview: true
         });
+    } else {
+        console.error('Showdown library not loaded');
+        return;
+    }
 
-        section.appendChild(buttonsContainer);
-        storySections.appendChild(section);
+    // Load preferences
+    loadPreferences();
+    
+    // Render story categories
+    renderStoryCategories();
+    
+    // Set up event listeners
+    setupEventListeners();
+    
+    // Handle initial URL hash
+    handleHashChange();
+    
+    console.log('Aurora Chronicles - Story Hub initialized');
+}
+
+// Load user preferences from localStorage
+function loadPreferences() {
+    const savedPreferences = localStorage.getItem('aurora-chronicles-preferences');
+    const preferences = savedPreferences ? 
+        { ...defaultPreferences, ...JSON.parse(savedPreferences) } : 
+        defaultPreferences;
+    
+    // Apply preferences to UI
+    themeSelect.value = preferences.theme;
+    layoutSelect.value = preferences.layout;
+    fontFamilySelect.value = preferences.fontFamily;
+    fontSizeSelect.value = preferences.fontSize;
+    showStoryMenuCheckbox.checked = preferences.showStoryMenu;
+    
+    // Apply preferences to document
+    applyTheme(preferences.theme);
+    applyLayout(preferences.layout);
+    applyFontFamily(preferences.fontFamily);
+    applyFontSize(preferences.fontSize);
+    applyStoryMenuVisibility(preferences.showStoryMenu);
+}
+
+// Save preferences to localStorage
+function savePreferences() {
+    const preferences = {
+        theme: themeSelect.value,
+        layout: layoutSelect.value,
+        fontFamily: fontFamilySelect.value,
+        fontSize: fontSizeSelect.value,
+        showStoryMenu: showStoryMenuCheckbox.checked
+    };
+    
+    localStorage.setItem('aurora-chronicles-preferences', JSON.stringify(preferences));
+}
+
+// Apply theme
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+// Apply layout
+function applyLayout(layout) {
+    document.documentElement.className = layout === 'full' ? 'container-full' : 'container-fixed';
+}
+
+// Apply font family
+function applyFontFamily(fontFamily) {
+    document.documentElement.style.setProperty('--font-family', fontFamily);
+}
+
+// Apply font size
+function applyFontSize(fontSize) {
+    document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+}
+
+// Apply story menu visibility
+function applyStoryMenuVisibility(show) {
+    if (show) {
+        storyListContainer.classList.remove('hidden');
+    } else {
+        storyListContainer.classList.add('hidden');
+    }
+}
+
+// Set up event listeners
+function setupEventListeners() {
+    // Settings toggle
+    settingsToggle.addEventListener('click', toggleSettingsMenu);
+    
+    // Close settings menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!settingsMenu.contains(e.target) && !settingsToggle.contains(e.target)) {
+            hideSettingsMenu();
+        }
+    });
+    
+    // Settings changes
+    showStoryMenuCheckbox.addEventListener('change', (e) => {
+        applyStoryMenuVisibility(e.target.checked);
+        savePreferences();
+    });
+    
+    themeSelect.addEventListener('change', (e) => {
+        applyTheme(e.target.value);
+        savePreferences();
+    });
+    
+    layoutSelect.addEventListener('change', (e) => {
+        applyLayout(e.target.value);
+        savePreferences();
+    });
+    
+    fontFamilySelect.addEventListener('change', (e) => {
+        applyFontFamily(e.target.value);
+        savePreferences();
+    });
+    
+    fontSizeSelect.addEventListener('change', (e) => {
+        applyFontSize(e.target.value);
+        savePreferences();
+    });
+    
+    // Back button
+    backButton.addEventListener('click', showStoryList);
+    
+    // Hash change for browser navigation
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
+}
+
+// Handle keyboard shortcuts
+function handleKeyboardShortcuts(e) {
+    // Escape key to close settings or show story list
+    if (e.key === 'Escape') {
+        if (settingsMenu.classList.contains('show')) {
+            hideSettingsMenu();
+        } else if (currentStory) {
+            showStoryList();
+        }
+    }
+    
+    // Ctrl/Cmd + K to toggle settings
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        toggleSettingsMenu();
+    }
+}
+
+// Toggle settings menu
+function toggleSettingsMenu() {
+    if (settingsMenu.classList.contains('show')) {
+        hideSettingsMenu();
+    } else {
+        showSettingsMenu();
+    }
+}
+
+// Show settings menu
+function showSettingsMenu() {
+    settingsMenu.classList.add('show');
+    settingsMenu.setAttribute('aria-hidden', 'false');
+    settingsToggle.setAttribute('aria-expanded', 'true');
+}
+
+// Hide settings menu
+function hideSettingsMenu() {
+    settingsMenu.classList.remove('show');
+    settingsMenu.setAttribute('aria-hidden', 'true');
+    settingsToggle.setAttribute('aria-expanded', 'false');
+}
+
+// Render story categories and stories
+function renderStoryCategories() {
+    const storyCategoriesContainer = document.getElementById('story-categories');
+    storyCategoriesContainer.innerHTML = '';
+    
+    Object.keys(stories).forEach(category => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'story-category';
+        
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.className = 'category-title';
+        categoryTitle.textContent = category;
+        
+        const storyList = document.createElement('div');
+        storyList.className = 'story-list';
+        
+        stories[category].forEach(story => {
+            const storyButton = document.createElement('button');
+            storyButton.className = 'story-btn';
+            storyButton.textContent = story.name;
+            storyButton.setAttribute('aria-label', `Read story: ${story.name}`);
+            storyButton.addEventListener('click', () => loadStory(story));
+            
+            storyList.appendChild(storyButton);
+        });
+        
+        categoryDiv.appendChild(categoryTitle);
+        categoryDiv.appendChild(storyList);
+        storyCategoriesContainer.appendChild(categoryDiv);
     });
 }
 
-// Load a specific story based on the URL
-function loadStory(url, title) {
-    // Use URL hash to navigate to the specific story
-    window.location.hash = `story=${encodeURIComponent(title)}`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(markdown => {
-            const converter = new showdown.Converter();
-            const htmlContent = converter.makeHtml(markdown);
-            document.getElementById('markdown-content').innerHTML = htmlContent;
-            document.getElementById('markdown-content').style.display = 'block';
-            document.title = `${title} - Aurora Chronicles`;
-
-            // Hide story sections and show markdown content
-            document.getElementById('story-sections').style.display = 'none';
-        })
-        .catch(error => {
-            document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
-            console.error('Error loading story content:', error);
-        });
+// Load and display a story
+async function loadStory(story) {
+    if (!converter) {
+        showError('Markdown converter not available');
+        return;
+    }
+    
+    // Update URL hash
+    window.location.hash = `story=${encodeURIComponent(story.name)}`;
+    
+    // Show loading indicator
+    showLoading();
+    
+    try {
+        const response = await fetch(story.url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const markdown = await response.text();
+        const html = converter.makeHtml(markdown);
+        
+        // Update content
+        storyContent.innerHTML = html;
+        currentStory = story;
+        
+        // Update page title
+        document.title = `Aurora Chronicles - Story Hub | ${story.name}`;
+        
+        // Show back button and hide story list if in mobile view
+        backButton.style.display = 'block';
+        
+        // Hide story list on mobile
+        if (window.innerWidth <= 968) {
+            storyListContainer.style.display = 'none';
+        }
+        
+        // Hide loading indicator
+        hideLoading();
+        
+        // Scroll to top of content
+        contentContainer.scrollTop = 0;
+        
+    } catch (error) {
+        console.error('Error loading story:', error);
+        showError(`Failed to load story: ${error.message}`);
+        hideLoading();
+    }
 }
 
-// Load the story from the URL hash (if any)
-function loadStoryFromHash() {
+// Show story list
+function showStoryList() {
+    // Reset URL hash
+    window.location.hash = '';
+    
+    // Reset page title
+    document.title = 'Aurora Chronicles - Story Hub';
+    
+    // Show welcome message
+    storyContent.innerHTML = `
+        <div class="welcome-message">
+            <h2>Welcome to Aurora Chronicles</h2>
+            <p>Select a story from the menu to begin reading, or use the settings to customize your reading experience.</p>
+        </div>
+    `;
+    
+    // Hide back button
+    backButton.style.display = 'none';
+    
+    // Show story list
+    storyListContainer.style.display = 'block';
+    
+    // Reset current story
+    currentStory = null;
+}
+
+// Handle URL hash changes
+function handleHashChange() {
     const hash = window.location.hash;
-    const match = hash.match(/#story=([^&]+)/);
+    
+    if (hash.startsWith('#story=')) {
+        const storyName = decodeURIComponent(hash.substring(7));
+        
+        // Find the story
+        let foundStory = null;
+        for (const category of Object.keys(stories)) {
+            foundStory = stories[category].find(s => s.name === storyName);
+            if (foundStory) break;
+        }
+        
+        if (foundStory) {
+            loadStory(foundStory);
+        } else {
+            console.warn('Story not found:', storyName);
+            showStoryList();
+        }
+    } else {
+        showStoryList();
+    }
+}
 
-    if (match) {
-        const storyName = decodeURIComponent(match[1]);
-        const story = findStoryByName(storyName);
+// Show loading indicator
+function showLoading() {
+    loadingIndicator.style.display = 'flex';
+}
 
-        if (story) {
-            loadStory(story.url, story.name);
+// Hide loading indicator
+function hideLoading() {
+    loadingIndicator.style.display = 'none';
+}
+
+// Show error message
+function showError(message) {
+    storyContent.innerHTML = `
+        <div class="error-message">
+            <h3>Error</h3>
+            <p>${message}</p>
+            <button onclick="showStoryList()" class="back-btn" style="position: static; margin-top: 1rem;">
+                Return to Story List
+            </button>
+        </div>
+    `;
+}
+
+// Utility functions for responsive behavior
+function handleResize() {
+    // Show/hide story list based on screen size and current state
+    if (window.innerWidth > 968) {
+        // Desktop view - always show story list if enabled
+        if (showStoryMenuCheckbox.checked) {
+            storyListContainer.style.display = 'block';
+        }
+    } else {
+        // Mobile view - hide story list when reading a story
+        if (currentStory) {
+            storyListContainer.style.display = 'none';
         }
     }
 }
 
-// Find a story by its name
-function findStoryByName(name) {
-    for (const category in stories) {
-        const story = stories[category].find(story => story.name === name);
-        if (story) {
-            return story;
-        }
-    }
-    return null;
+// Add resize listener
+window.addEventListener('resize', handleResize);
+
+// Initialize the application when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
 }
 
-// Show the settings menu
-function showMenu() {
-    const menu = document.getElementById('settings-menu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-
-// Toggle settings menu option
-function toggleMenuOption(option) {
-    if (option === 'toggleTheme') {
-        toggleTheme();
-    } else if (option.startsWith('font-')) {
-        const font = option.split('-')[1];
-        changeFont(font);
-    } else if (option.startsWith('size-')) {
-        const size = option.split('-')[1];
-        changeFontSize(size);
-    } else if (option === 'toggleLayout') {
-        toggleLayout();
-    } else if (option === 'showMenu') {
-        showStoryMenu();
-    }
-    showMenu(); // Hide the settings menu after selection
-}
-
-// Show the story menu
-function showStoryMenu() {
-    document.getElementById('story-sections').style.display = 'block';
-    document.getElementById('markdown-content').style.display = 'none';
-}
-
-// Initialize the page with user preferences
-window.addEventListener('hashchange', loadStoryFromHash);
-
-// Initialize the page on load
-window.onload = function () {
-    loadTheme();
-    loadLayout(); // Load the layout preference
-    loadFontSize(); // Load the saved font size
-    loadStories();
-    loadStoryFromHash(); // Check if there's a story in the hash
-};
+// Global functions for error handler
+window.showStoryList = showStoryList;

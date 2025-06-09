@@ -3,46 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
-    <title>Story Hub</title>
-
+    <title>Aurora Chronicles - Story Hub</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
-    <script src="script.js" defer></script>
-
 </head>
-    
 <body>
-    <header>
-        <h1>Aurora Chronicles - Story Hub</h1>
-        <p>Your gateway to explore long and short stories.</p>
-    </header>
+    <!-- Settings Button -->
+    <button id="settings-toggle" class="settings-btn" aria-label="Open Settings">
+        <span class="settings-icon">⚙️</span>
+    </button>
 
-    <button class="settings-btn" onclick="showMenu()">Settings</button>
-    <div id="settings-menu" class="settings-menu">
-        <div class="menu-option" onclick="toggleMenuOption('showMenu')">Show Menu</div>
-        <div class="menu-option" onclick="toggleMenuOption('toggleTheme')">Toggle Theme</div>
-        <div class="menu-option" onclick="toggleMenuOption('toggleLayout')">Toggle Layout</div>
-        <div class="menu-option">Select Font:</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Arial')">Arial</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Georgia')">Georgia</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Tahoma')">Tahoma</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Verdana')">Verdana</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('font-Comic Sans MS')">Comic Sans MS</div>
-        <div class="menu-option">Select Font Size:</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-14')">14px</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-16')">16px</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-18')">18px</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-20')">20px</div>
-        <div class="menu-option font-size-option" onclick="toggleMenuOption('size-22')">22px</div>
+    <!-- Settings Menu -->
+    <div id="settings-menu" class="settings-menu" role="menu" aria-hidden="true">
+        <div class="settings-content">
+            <h3>Settings</h3>
+            
+            <div class="setting-group">
+                <label>
+                    <input type="checkbox" id="show-story-menu" checked>
+                    Show Story Menu
+                </label>
+            </div>
+
+            <div class="setting-group">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="forest">Forest</option>
+                    <option value="sunset">Sunset</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label for="layout-select">Layout:</label>
+                <select id="layout-select">
+                    <option value="fixed">Fixed Width</option>
+                    <option value="full">Full Width</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label for="font-family-select">Font Family:</label>
+                <select id="font-family-select">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="Tahoma, sans-serif">Tahoma</option>
+                    <option value="Verdana, sans-serif">Verdana</option>
+                    <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label for="font-size-select">Font Size:</label>
+                <select id="font-size-select">
+                    <option value="14">14px</option>
+                    <option value="16">16px</option>
+                    <option value="18">18px</option>
+                    <option value="20">20px</option>
+                    <option value="22">22px</option>
+                </select>
+            </div>
+        </div>
     </div>
-    
-    <div id="story-sections"></div>
-    <div id="markdown-content"></div>
 
-    <footer>
-        <p>&copy; 2024 Aurora Chronicles. All Rights Reserved.</p>
-    </footer>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Aurora Chronicles</h1>
+            <p class="subtitle">Story Hub</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Story List Container -->
+            <aside id="story-list-container" class="story-list-container">
+                <h2>Story Categories</h2>
+                <div id="story-categories" class="story-categories">
+                    <!-- Dynamically populated -->
+                </div>
+            </aside>
+
+            <!-- Content Container -->
+            <section id="content-container" class="content-container">
+                <div id="story-content" class="story-content">
+                    <div class="welcome-message">
+                        <h2>Welcome to Aurora Chronicles</h2>
+                        <p>Select a story from the menu to begin reading, or use the settings to customize your reading experience.</p>
+                    </div>
+                </div>
+                
+                <!-- Back Button -->
+                <button id="back-to-stories" class="back-btn" style="display: none;">
+                    ← Back to Stories
+                </button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Aurora Chronicles. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="loading-indicator" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading story...</p>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
