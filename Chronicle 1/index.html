@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../favicon.png" type="image/png" />
+    <title>Aurora Chronicles - Story Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.0/dist/showdown.min.js"></script>
+</head>
+<body>
+    <!-- Theme Selection Hub -->
+    <div id="theme-hub" class="theme-hub">
+        <div class="theme-hub-content">
+            <div class="theme-hub-header">
+                <h1 class="theme-hub-title">Aurora Chronicles</h1>
+                <p class="theme-hub-subtitle">Choose your reading experience</p>
+            </div>
+            
+            <div class="theme-grid">
+                <div class="theme-card" data-theme="light">
+                    <div class="theme-preview light-preview">
+                        <div class="preview-header"></div>
+                        <div class="preview-content">
+                            <div class="preview-line"></div>
+                            <div class="preview-line short"></div>
+                            <div class="preview-line"></div>
+                        </div>
+                    </div>
+                    <h3>Light</h3>
+                    <p>Clean and bright</p>
+                </div>
+
+                <div class="theme-card" data-theme="dark">
+                    <div class="theme-preview dark-preview">
+                        <div class="preview-header"></div>
+                        <div class="preview-content">
+                            <div class="preview-line"></div>
+                            <div class="preview-line short"></div>
+                            <div class="preview-line"></div>
+                        </div>
+                    </div>
+                    <h3>Dark</h3>
+                    <p>Easy on the eyes</p>
+                </div>
+
+                <div class="theme-card" data-theme="ocean">
+                    <div class="theme-preview ocean-preview">
+                        <div class="preview-header"></div>
+                        <div class="preview-content">
+                            <div class="preview-line"></div>
+                            <div class="preview-line short"></div>
+                            <div class="preview-line"></div>
+                        </div>
+                    </div>
+                    <h3>Ocean</h3>
+                    <p>Calm and serene</p>
+                </div>
+
+                <div class="theme-card" data-theme="forest">
+                    <div class="theme-preview forest-preview">
+                        <div class="preview-header"></div>
+                        <div class="preview-content">
+                            <div class="preview-line"></div>
+                            <div class="preview-line short"></div>
+                            <div class="preview-line"></div>
+                        </div>
+                    </div>
+                    <h3>Forest</h3>
+                    <p>Natural and fresh</p>
+                </div>
+
+                <div class="theme-card" data-theme="sunset">
+                    <div class="theme-preview sunset-preview">
+                        <div class="preview-header"></div>
+                        <div class="preview-content">
+                            <div class="preview-line"></div>
+                            <div class="preview-line short"></div>
+                            <div class="preview-line"></div>
+                        </div>
+                    </div>
+                    <h3>Sunset</h3>
+                    <p>Warm and cozy</p>
+                </div>
+            </div>
+
+            <button id="skip-theme-selection" class="skip-btn">
+                Skip and use default theme
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Button -->
+    <button id="settings-toggle" class="settings-btn" aria-label="Open Settings">
+        <span class="settings-icon">⚙️</span>
+    </button>
+
+    <!-- Settings Menu -->
+    <div id="settings-menu" class="settings-menu" role="menu" aria-hidden="true">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3>Settings</h3>
+                <button id="close-settings" class="close-btn" aria-label="Close Settings">×</button>
+            </div>
+            
+            <div class="settings-body">
+                <div class="setting-group">
+                    <label class="setting-label">
+                        <input type="checkbox" id="show-story-menu" checked>
+                        <span class="checkmark"></span>
+                        Show Story Menu
+                    </label>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label" for="theme-select">Theme</label>
+                    <div class="select-wrapper">
+                        <select id="theme-select">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="ocean">Ocean</option>
+                            <option value="forest">Forest</option>
+                            <option value="sunset">Sunset</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label" for="layout-select">Layout</label>
+                    <div class="select-wrapper">
+                        <select id="layout-select">
+                            <option value="fixed">Fixed Width</option>
+                            <option value="full">Full Width</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label" for="font-family-select">Font Family</label>
+                    <div class="select-wrapper">
+                        <select id="font-family-select">
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="Georgia, serif">Georgia</option>
+                            <option value="Tahoma, sans-serif">Tahoma</option>
+                            <option value="Verdana, sans-serif">Verdana</option>
+                            <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label" for="font-size-select">Font Size</label>
+                    <div class="select-wrapper">
+                        <select id="font-size-select">
+                            <option value="14">14px</option>
+                            <option value="16">16px</option>
+                            <option value="18">18px</option>
+                            <option value="20">20px</option>
+                            <option value="22">22px</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <button id="reset-preferences" class="reset-btn">
+                        Reset to Defaults
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Aurora Chronicles</h1>
+            <p class="subtitle">Story Hub</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Story List Container -->
+            <aside id="story-list-container" class="story-list-container">
+                <h2>Story Categories</h2>
+                <div id="story-categories" class="story-categories">
+                    <!-- Dynamically populated -->
+                </div>
+            </aside>
+
+            <!-- Content Container -->
+            <section id="content-container" class="content-container">
+                <div id="story-content" class="story-content">
+                    <div class="welcome-message">
+                        <h2>Welcome to Aurora Chronicles</h2>
+                        <p>Select a story from the menu to begin reading, or use the settings to customize your reading experience.</p>
+                    </div>
+                </div>
+                
+                <!-- Back Button -->
+                <button id="back-to-stories" class="back-btn" style="display: none;">
+                    ← Back to Stories
+                </button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Aurora Chronicles. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="loading-indicator" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading story...</p>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

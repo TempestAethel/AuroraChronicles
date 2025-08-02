@@ -1,0 +1,131 @@
+/* Base styles for both light and dark themes */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+h1 {
+    text-align: center;
+}
+
+.story-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.story-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.story-button:hover {
+    background-color: #45a049;
+}
+
+/* Markdown content div */
+#markdown-content {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: none; /* Hidden initially */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1em;
+}
+
+/* Fallback message styles */
+#fallback-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Light theme styles */
+.light-theme {
+    background-color: #fff;
+    color: #000;
+}
+
+.light-theme #markdown-content {
+    background-color: #f9f9f9;
+    border-color: #ddd;
+}
+
+.light-theme #fallback-message {
+    background-color: #f4f4f4;
+    color: #333;
+    border-color: #ddd;
+}
+
+/* Dark theme styles */
+.dark-theme {
+    background-color: #121212;
+    color: #eaeaea;
+}
+
+.dark-theme #markdown-content {
+    background-color: #2c2c2c;
+    border-color: #444;
+    color: #eaeaea;
+}
+
+.dark-theme #fallback-message {
+    background-color: #333;
+    color: #eaeaea;
+    border-color: #444;
+}
+
+/* Blockquote Styling */
+blockquote {
+    background-color: #f4f4f4;
+    border-left: 5px solid #4CAF50;
+    padding: 10px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #333;
+}
+
+/* Dark Theme Blockquote */
+.dark-theme blockquote {
+    background-color: #333;
+    border-left: 5px solid #4CAF50;
+    color: #eaeaea;
+}
+
+/* Toggle button styles */
+#theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#theme-toggle:hover {
+    background-color: #45a049;
+}
