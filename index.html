@@ -1,104 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="favicon.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AuroraChronicles</title>
 
-    <title>AuroraChronicles</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #e4e4e4;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-        header {
-            background-color: #333;
-            padding: 20px;
-            text-align: center;
-        }
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e7ff;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        header h1 {
-            color: #fff;
-            font-size: 2rem;
-            margin: 0;
-        }
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+    #theme-toggle {
+      background: transparent;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 6px 14px;
+      user-select: none;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    #theme-toggle:hover, #theme-toggle:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      outline: none;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    /* Main container */
+    main.container {
+      flex-grow: 1;
+      max-width: 960px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
 
-        .link-item {
-            background-color: #444;
-            padding: 20px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer; /* Makes the entire div clickable */
-        }
+    /* Sections styling */
+    section {
+      background: rgba(255 255 255 / 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 6px 14px rgba(26, 26, 26, 0.5);
+      transition: background 0.3s ease;
+    }
+    section:hover {
+      background: rgba(106, 17, 203, 0.15);
+    }
 
-        .link-item:hover {
-            background-color: #555;
-            transform: translateY(-5px);
-        }
+    section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #e0e7ff;
+      margin-bottom: 1rem;
+      letter-spacing: 1.5px;
+      border-bottom: 3px solid #6a11cb;
+      padding-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
 
-        .link-item h3 {
-            color: #fff;
-            margin: 0 0 10px;
-        }
+    /* Link items */
+    .link-item {
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(26, 26, 26, 0.4);
+      transition: all 0.3s ease;
+      border: 1.5px solid transparent;
+      user-select: none;
+    }
+    .link-item:hover, .link-item:focus {
+      background: rgba(106, 17, 203, 0.25);
+      box-shadow: 0 10px 20px rgba(106, 17, 203, 0.7);
+      transform: translateY(-5px) scale(1.03);
+      border-color: #6a11cb;
+      outline: none;
+    }
+    .link-item h3 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    .link-item p {
+      margin: 0;
+      color: #d1d9ffcc;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
 
-        .link-item p {
-            color: #bbb;
-            margin: 0 0 10px;
-        }
+    /* About section */
+    #about {
+      background: rgba(255 255 255 / 0.12);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      color: #dcdcffdd;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 6px 14px rgba(26, 26, 26, 0.5);
+      max-width: 960px;
+      margin: 0 auto 3rem;
+      user-select: text;
+    }
+    #about p {
+      margin-bottom: 0.8rem;
+    }
+    #about a {
+      color: #cbd5ff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    #about a:hover, #about a:focus {
+      color: #fff;
+      text-decoration: underline;
+    }
 
-        footer {
-            background-color: #333;
-            padding: 15px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #fff;
-        }
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #2575fc, #6a11cb);
+      padding: 1rem 1.5rem;
+      text-align: center;
+      color: #eef1ff;
+      font-size: 0.9rem;
+      box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.35);
+      user-select: none;
+    }
+    footer p {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+    }
 
-        footer a {
-            color: #e4e4e4;
-            text-decoration: none;
-        }
+    /* Accessibility for keyboard */
+    .link-item:focus {
+      outline: 3px solid #6a11cb;
+      outline-offset: 3px;
+    }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    /* Light theme */
+    body.light-theme {
+      background: #f5f7fa;
+      color: #222;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    body.light-theme header {
+      background: #a29bfe;
+      box-shadow: 0 4px 8px rgba(162, 155, 254, 0.4);
+    }
+    body.light-theme header h1 {
+      color: #2d2d2d;
+      text-shadow: none;
+    }
+    body.light-theme #theme-toggle {
+      border-color: #2d2d2d;
+      color: #2d2d2d;
+    }
+    body.light-theme #theme-toggle:hover,
+    body.light-theme #theme-toggle:focus {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    body.light-theme section {
+      background: #ffffffcc;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      color: #222;
+    }
+    body.light-theme section:hover {
+      background: #d6d6ff;
+    }
+    body.light-theme .link-item {
+      background: #ffffffcc;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      color: #333;
+      border-color: #a29bfe;
+    }
+    body.light-theme .link-item:hover,
+    body.light-theme .link-item:focus {
+      background: #b6b6ff;
+      box-shadow: 0 12px 24px rgba(162, 155, 254, 0.4);
+      border-color: #6c5ce7;
+      color: #111;
+    }
+    body.light-theme footer {
+      background: #a29bfe;
+      color: #2d2d2d;
+      box-shadow: 0 -4px 8px rgba(162, 155, 254, 0.4);
+    }
+    body.light-theme footer p {
+      color: #3a3a3a;
+    }
+    body.light-theme #about {
+      background: #f0f0ff;
+      color: #222;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    }
+    body.light-theme #about a {
+      color: #5c5c8a;
+    }
+    body.light-theme #about a:hover,
+    body.light-theme #about a:focus {
+      color: #2d2d2d;
+    }
 
-    </style>
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>AuroraChronicles</h1>
-    </header>
+  <header>
+    <h1>AuroraChronicles</h1>
+    <button id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">🌙</button>
+  </header>
 
-    <div class="container">
-        <div class="link-item" onclick="window.location.href='Chronicle 1/'">
-            <h3>Chronicle 1: The Original Collection</h3>
-            <p>The first set of stories published in the AuroraChronicles. These tales introduce the world and its characters, laying the foundation for the themes explored in the collection.</p>
-        </div>
+  <main class="container">
+    <!-- Chronicles Section -->
+    <section>
+      <h2>Chronicles</h2>
 
-        <div class="link-item" onclick="window.location.href='Chronicle 2/'">
-            <h3>Chronicle 2: A New Perspective</h3>
-            <p>A fresh collection of stories, reimagined with a new layout. This collection embraces a more refined design, perfect for exploring longer and more intricate stories.</p>
-        </div>
-    </div>
+      <div class="link-item" tabindex="0" role="button" onclick="window.location.href='Chronicle 1/'" onkeypress="if(event.key==='Enter'||event.key===' ') window.location.href='Chronicle 1/'">
+        <h3>Chronicle 1: The Original Collection</h3>
+        <p>The first set of stories published in the AuroraChronicles. These tales introduce the world and its characters, laying the foundation for the themes explored in the collection.</p>
+      </div>
 
-    <footer>
-        <p>AuroraChronicles - Chronicles 2.0 &copy; 2025 </p>
-        <p>Chronicle 2 is yet to be updated fully"</p>
-    </footer>
+      <div class="link-item" tabindex="0" role="button" onclick="window.location.href='Chronicle 2/'" onkeypress="if(event.key==='Enter'||event.key===' ') window.location.href='Chronicle 2/'">
+        <h3>Chronicle 2: A New Perspective</h3>
+        <p>A fresh collection of stories, reimagined with a new layout. This collection embraces a more refined design, perfect for exploring longer and more intricate stories.</p>
+      </div>
+    </section>
+
+    <!-- Books Section (Populated via JS) -->
+    <section>
+      <h2>Books</h2>
+      <div id="books-section" aria-live="polite" aria-relevant="additions">
+        <!-- Book items injected here -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- New About Section -->
+  <section id="about" aria-label="About AuroraChronicles">
+    <p><strong>AuroraChronicles Overview:</strong></p>
+    <p>The Chronicles are mostly AI-assisted, based on my original concepts. However, Chronicle 2 has mostly stagnated as the stories began to lose meaning for me.</p>
+    <p>In contrast, the Books have grown deeper and more meaningful over time — they represent my true passion.</p>
+    <p>You can explore the full Books collection on <a href="https://github.com/Runarok/books" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+    <p>Thanks for your support — stay tuned for new updates and content!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 AuroraChronicles</p>
+  </footer>
+
+  <script>
+    async function loadBooks() {
+      const booksContainer = document.getElementById('books-section');
+      const rawUrl = 'https://raw.githubusercontent.com/Runarok/books/main/Books.json';
+
+      try {
+        const response = await fetch(rawUrl);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const books = await response.json();
+
+        if (!Array.isArray(books)) throw new Error('JSON is not an array');
+
+        booksContainer.innerHTML = '';
+
+        books.forEach((book, i) => {
+          if (
+            typeof book.title !== 'string' ||
+            typeof book.description !== 'string' ||
+            typeof book.link !== 'string'
+          ) {
+            console.warn(`Book at index ${i} missing fields`);
+            return;
+          }
+
+          const item = document.createElement('div');
+          item.className = 'link-item';
+          item.setAttribute('tabindex', '0');
+          item.setAttribute('role', 'button');
+          item.onclick = () => window.open(book.link, '_blank', 'noopener');
+          item.onkeypress = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              window.open(book.link, '_blank', 'noopener');
+            }
+          };
+
+          item.innerHTML = `
+            <h3>${book.title}</h3>
+            <p>${book.description}</p>
+          `;
+
+          booksContainer.appendChild(item);
+        });
+
+        if (!booksContainer.children.length) {
+          booksContainer.innerHTML = '<p>No valid books found.</p>';
+        }
+      } catch (error) {
+        console.error('Error loading books:', error);
+        booksContainer.innerHTML = `<p style="color: #ff6666;">Failed to load books. Please try again later.</p>`;
+      }
+    }
+
+    // Theme toggle
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('auroraTheme');
+    if (savedTheme === 'light') {
+      body.classList.add('light-theme');
+      toggleButton.textContent = '☀️';
+    }
+
+    toggleButton.addEventListener('click', () => {
+      if (body.classList.contains('light-theme')) {
+        body.classList.remove('light-theme');
+        toggleButton.textContent = '🌙';
+        localStorage.setItem('auroraTheme', 'dark');
+      } else {
+        body.classList.add('light-theme');
+        toggleButton.textContent = '☀️';
+        localStorage.setItem('auroraTheme', 'light');
+      }
+    });
+
+    loadBooks();
+  </script>
 
 </body>
 </html>
